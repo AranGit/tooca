@@ -1,0 +1,39 @@
+@import 'tailwindcss';
+@import './styles/generated-tokens.css';
+@import './styles/fonts.css';
+@import './styles/foundations.css';
+
+:root {
+  font-family: var(--font-sans);
+  color: var(--color-gray-900);
+  background: var(--color-gray-50);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+button, input, textarea, select { font: inherit; }
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--color-accent-blue-300);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

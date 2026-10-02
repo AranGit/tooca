@@ -1,0 +1,50 @@
+{
+  "name": "tooca",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "tokens": "node scripts/generate-tokens.mjs",
+    "predev": "npm run tokens",
+    "dev": "vite",
+    "prebuild": "npm run tokens",
+    "build": "tsc -b && vite build",
+    "typecheck": "tsc -b --pretty false",
+    "lint": "oxlint src .storybook scripts vite.config.ts vitest.config.ts",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:run": "vitest run --project unit",
+    "test:storybook": "vitest run --project storybook",
+    "prestorybook": "npm run tokens",
+    "storybook": "storybook dev -p 6006",
+    "prebuild-storybook": "npm run tokens",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "motion": "^13.5.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "^10.6.1",
+    "@storybook/addon-vitest": "^10.6.1",
+    "@storybook/react-vite": "^10.6.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "@vitest/browser-playwright": "^5.0.3",
+    "jsdom": "^29.1.1",
+    "oxlint": "^1.81.0",
+    "playwright": "^1.63.0",
+    "storybook": "^10.6.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.3"
+  }
+}

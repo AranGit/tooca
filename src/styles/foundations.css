@@ -1,0 +1,30 @@
+@theme {
+  --shadow-elevation-01: 0 2px 8px rgb(0 196 179 / 8%);
+  --shadow-elevation-02: 0 2px 16px rgb(0 196 179 / 12%);
+  --shadow-elevation-03: 0 8px 16px rgb(0 196 179 / 12%);
+  --shadow-elevation-04: 0 16px 24px rgb(0 196 179 / 16%);
+  --shadow-elevation-05: 0 8px 16px -4px rgb(0 196 179 / 12%);
+  --shadow-elevation-06: 0 16px 24px rgb(0 196 179 / 10%), 0 4px 8px -4px rgb(0 196 179 / 10%);
+  --shadow-elevation-07: 0 16px 32px rgb(0 196 179 / 16%), 0 4px 12px -4px rgb(0 196 179 / 12%);
+  --shadow-elevation-08: 0 24px 40px rgb(0 196 179 / 18%), 0 8px 24px -4px rgb(0 196 179 / 14%);
+}
+
+@layer components {
+  .text-h1 { font-size: 36px; font-weight: 700; line-height: 40px; }
+  .text-h2 { font-size: 36px; font-weight: 325; line-height: 36px; }
+  .text-h3 { font-size: 24px; font-weight: 350; line-height: 30px; }
+  .text-h4 { font-size: 20px; font-weight: 350; line-height: 24px; }
+  .text-subheader-1 { font-size: 14px; font-weight: 350; line-height: 20px; }
+  .text-subheader-2 { font-size: 14px; font-weight: 325; line-height: 20px; }
+  .text-title-1 { font-size: 20px; font-weight: 350; line-height: 24px; }
+  .text-title-2 { font-size: 18px; font-weight: 350; line-height: 22px; }
+  .text-title-3 { font-size: 16px; font-weight: 350; line-height: 20px; }
+  .text-body-1 { font-size: 16px; font-weight: 325; line-height: 20px; }
+  .text-body-2 { font-size: 14px; font-weight: 350; line-height: 24px; }
+  .text-body-3 { font-size: 14px; font-weight: 325; line-height: 24px; }
+  .text-body-4 { font-size: 12px; font-weight: 350; line-height: 16px; }
+  .text-body-5 { font-size: 12px; font-weight: 325; line-height: 16px; }
+  .text-button-large { font-size: 20px; font-weight: 350; line-height: 24px; }
+  .text-button-small { font-size: 16px; font-weight: 350; line-height: 16px; }
+  .text-small { font-size: 9px; font-weight: 350; line-height: 10px; }
+}
