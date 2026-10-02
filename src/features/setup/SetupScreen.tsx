@@ -34,7 +34,7 @@ export function SetupScreen() {
   }
 
   function handleExamples() {
-    const picked = pickExamples(thoughts.map((thought) => thought.text))
+    const picked = pickExamples(thoughts.map((thought) => thought.text), 1)
     if (picked.length > 0) addThoughts(picked)
   }
 

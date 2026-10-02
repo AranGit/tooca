@@ -38,6 +38,6 @@ Brand artwork is stored in `src/assets/brand`, mascot illustrations in `src/asse
 
 ## Step 1
 
-The Add cards screen lets users write concerns, add two randomly chosen examples at a time, remove cards, and continue to the next phase. The examples come from `src/features/setup/examples.ts` and never repeat an existing card with the same text. Session data is managed by Zustand and saved to `sessionStorage` so a refresh keeps the current cards and phase in the same tab.
+The Add cards screen lets users write concerns, add one randomly chosen example at a time, remove cards, and continue to the next phase. The examples come from `src/features/setup/examples.ts` and never repeat an existing card with the same text. Session data is managed by Zustand and saved to `sessionStorage` so a refresh keeps the current cards and phase in the same tab.
 
 The Sort phase currently displays a handoff with the collected cards. Its sorting interaction and the reflection view are planned for the following steps.

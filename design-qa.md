@@ -9,6 +9,7 @@
 - Source visual truth: `../1 SETUP/1.1 Desktop.png` (1440 × 1024), `../1 SETUP/1.1 Mobile.png` (402 × 874), and `../1 SETUP/1.2 Desktip.png` (1440 × 1024).
 - Rendered implementation: `qa/step1-desktop-1440.png` (1440 × 1024), `qa/step1-mobile-402x812.png` (402 × 812), and `qa/step1-desktop-10-cards.png` (1440 × 1024), captured from `http://127.0.0.1:4173/`.
 - Side-by-side full-view comparison: `qa/comparison-full.png`. The desktop captures are displayed at 50% in both columns. The mobile source's 62-pixel device status bar is cropped, leaving the same 402 × 812 app area as the browser capture at 1:1. Source and implementation use the same two-card state for the primary comparison. The ten-card source and implementation use different concern texts because examples are deliberately randomized, but match in count and layout.
+- Responsive follow-up captures: `qa/step1-compact-desktop-fixed.png` (1000 × 930) and `qa/step1-tablet-fixed.png` (780 × 930), checked against the reference's desktop bottom margin and the user-supplied narrow-window screenshot. The compact desktop button now has 86 px below it, and the tablet button has 84 px; the top-right mascot no longer covers the label.
 - Focused inspection: the mobile comparison is shown at 1:1 within the combined image; headline wrapping, mascot crop, input/button dimensions, card spacing, and CTA position are legible there. The desktop ten-card region visibly preserves the list viewport and scroll treatment.
 
 **Fidelity review**
@@ -26,7 +27,7 @@
 **Implementation Checklist**
 
 - [x] Add and remove concerns, including long text.
-- [x] Randomly add two distinct example concerns without repeating existing examples.
+- [x] Randomly add one example concern per click without repeating existing examples.
 - [x] Preserve cards and phase across refresh in the same tab.
 - [x] Keep the primary action visible when ten or more cards are present.
 - [x] Verify desktop, mobile, tests, Storybook, lint, typecheck, and production build.
@@ -37,6 +38,7 @@
 
 **Comparison history**
 
-- First and final side-by-side pass: no P0/P1/P2 findings. No corrective visual iteration was needed after this comparison.
+- Initial 1440 px desktop and 402 px mobile side-by-side pass: no P0/P1/P2 findings at those viewports.
+- Follow-up narrow-window review: the user identified a P2 regression at intermediate widths. At roughly 780 px, the two-column desktop layout compressed the form and mascot into the same area, while a viewport-height calculation left no bottom margin below the CTA. The fix introduces a tablet layout through 920 px, reserves vertical mascot space from 921–1100 px, and subtracts the intended bottom margin from compact desktop stage height. The two new screenshots above show the corrected positions; the 1440 × 1024 and 402 × 812 reference sizes remain intact.
 
 final result: passed

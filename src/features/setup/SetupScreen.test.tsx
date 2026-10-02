@@ -37,14 +37,14 @@ describe('SetupScreen', () => {
     await user.click(screen.getByRole('button', { name: 'Try with examples' }))
 
     const cards = useSessionStore.getState().thoughts
-    expect(cards).toHaveLength(5)
+    expect(cards).toHaveLength(3)
     expect(cards[0].text).toBe('My own concern')
-    expect(new Set(cards.map((card) => card.text)).size).toBe(5)
+    expect(new Set(cards.map((card) => card.text)).size).toBe(3)
 
     await user.click(screen.getByRole('button', { name: 'Remove: My own concern' }))
-    expect(useSessionStore.getState().thoughts).toHaveLength(4)
+    expect(useSessionStore.getState().thoughts).toHaveLength(2)
 
-    await user.click(screen.getByRole('button', { name: /Let’s sort these 4 things/ }))
+    await user.click(screen.getByRole('button', { name: /Let’s sort these 2 things/ }))
     expect(useSessionStore.getState().phase).toBe('sort')
     expect(JSON.parse(sessionStorage.getItem('tooca-session') ?? '{}').state.phase).toBe('sort')
   })
