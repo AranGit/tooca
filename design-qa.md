@@ -1,4 +1,6 @@
-# Step 1 design QA
+# Tooca design QA
+
+## Step 1
 
 **Findings**
 
@@ -40,5 +42,35 @@
 
 - Initial 1440 px desktop and 402 px mobile side-by-side pass: no P0/P1/P2 findings at those viewports.
 - Follow-up narrow-window review: the user identified a P2 regression at intermediate widths. At roughly 780 px, the two-column desktop layout compressed the form and mascot into the same area, while a viewport-height calculation left no bottom margin below the CTA. The fix introduces a tablet layout through 920 px, reserves vertical mascot space from 921–1100 px, and subtracts the intended bottom margin from compact desktop stage height. The two new screenshots above show the corrected positions; the 1440 × 1024 and 402 × 812 reference sizes remain intact.
+
+## Step 2
+
+**Findings**
+
+- No actionable P0/P1/P2 differences remain in the sorting screen. The card, character art, title, actions, and bottom spacing follow the desktop and mobile references.
+
+**Evidence**
+
+- Source visual truth: `../Step 2 - 3/2.1 CATEGORIZE/Desktop.png` (1440 × 1024) and `../Step 2 - 3/2.1 CATEGORIZE Begin/Mobile.png` (402 × 874).
+- Rendered implementation: `qa/step2/desktop-1440x1024.png` (1440 × 1024) and `qa/step2/mobile-402x812.png` (402 × 812), captured from `http://127.0.0.1:4173/` with two pending cards and “Job interview tomorrow.” in front.
+- Side-by-side full-view comparison: `qa/step2/comparison.png`. Desktop images are displayed at 50% in both columns. The mobile source's 62-pixel status bar is cropped; the remaining 402 × 812 app area is compared with the browser capture at 1:1. The screenshot itself allows focused inspection of mobile typography, mascot, card border, underlay, and controls.
+- Responsive checks: 1101, 1100, 1000, 920, 780, and 402 px widths, plus a 402 × 667 short viewport. The card stays clear of the actions; the short viewport can scroll to them.
+- Interaction checks in the browser: left and right buttons, a right swipe, a short drag that returns the card, automatic advance to the next card, refresh during sorting, return to Step 1, adding another card, and completion into reflection.
+
+**Fidelity review**
+
+- Typography: bundled Gotham Rounded reproduces the headline and card hierarchy; the example card fits on one line in both target viewports.
+- Spacing and layout: the desktop card is 500 × 242 at x=462/y=411 versus roughly x=460/y=410 in the source. The mobile card is 330 × 172 at x=36/y=436 versus roughly x=36/y=438 in the cropped source. The controls retain clear bottom space.
+- Colors and tokens: the blue card and gradient follow the supplied palette. The two action fills are darker than the reference to keep white button text at accessible contrast; the category meanings remain clear.
+- Image quality: the supplied mascot SVGs are used directly; desktop art sits in the source's colored oval regions and the mobile phone mascot sits above the card.
+- Copy and content: heading, guidance, category labels, and example card copy match the source.
+
+**Comparison history**
+
+- The first combined comparison found the mobile example text wrapping to two lines and the desktop character circles slightly high and oversized. The mobile card font/underlay and desktop art geometry were adjusted, then both implementation screenshots were recaptured and compared side by side again. No P0/P1/P2 differences remain.
+
+**Follow-up polish**
+
+- [P3] Mascot rendering and the background gradient differ subtly from the flattened source screenshots. The original SVG artwork is retained.
 
 final result: passed

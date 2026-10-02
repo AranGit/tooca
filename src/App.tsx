@@ -1,7 +1,8 @@
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
-import { ArrowLeft, Check, RotateCcw } from 'lucide-react'
+import { Check, RotateCcw } from 'lucide-react'
 import toocaLogo from '@/assets/brand/tooca-logo.svg'
 import { SetupScreen } from '@/features/setup/SetupScreen'
+import { SortScreen } from '@/features/sort/SortScreen'
 import { useSessionStore } from '@/store/session'
 import './features/flow/flow.css'
 
@@ -30,30 +31,6 @@ function StepIndicator({ phase }: { phase: 'setup' | 'sort' | 'reflection' }) {
         <span>Sort cards</span>
       </span>
     </nav>
-  )
-}
-
-function SortHandoff() {
-  const thoughts = useSessionStore((state) => state.thoughts)
-  const returnToSetup = useSessionStore((state) => state.returnToSetup)
-
-  return (
-    <section className="handoff-screen" aria-labelledby="sort-heading">
-      <div>
-        <p className="handoff-screen__eyebrow">Step 2 · Sort cards</p>
-        <h1 id="sort-heading">Your cards are ready.</h1>
-        <p>
-          You added {thoughts.length} {thoughts.length === 1 ? 'thing' : 'things'}.
-          The sorting experience is the next step to build.
-        </p>
-        <button type="button" onClick={returnToSetup} className="handoff-screen__back">
-          <ArrowLeft size={18} aria-hidden="true" /> Back to cards
-        </button>
-      </div>
-      <ul className="handoff-screen__cards">
-        {thoughts.map((thought) => <li key={thought.id}>{thought.text}</li>)}
-      </ul>
-    </section>
   )
 }
 
@@ -87,7 +64,7 @@ function App() {
           <StepIndicator phase={phase} />
         </div>
       </header>
-      <main id="main" className="flow-main">
+      <main id="main" className={`flow-main ${phase === 'sort' ? 'flow-main--sort' : ''}`}>
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={phase}
@@ -100,7 +77,7 @@ function App() {
             {phase === 'setup' ? (
               <SetupScreen />
             ) : phase === 'sort' ? (
-              <SortHandoff />
+              <SortScreen />
             ) : (
               <ReflectionHandoff />
             )}

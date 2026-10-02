@@ -76,7 +76,9 @@ export const useSessionStore = create<SessionState>()(
           history: state.history.filter((decision) => decision.thoughtId !== id),
         })),
       startSorting: () => {
-        if (get().thoughts.length > 0) set({ phase: 'sort' })
+        const thoughts = get().thoughts
+        if (thoughts.length === 0) return
+        set({ phase: thoughts.some((thought) => thought.category === null) ? 'sort' : 'reflection' })
       },
       returnToSetup: () => set({ phase: 'setup' }),
       categorizeThought: (id, category) =>
@@ -151,6 +153,9 @@ export const useSessionStore = create<SessionState>()(
             : requestedPhase === 'reflection' &&
                 thoughts.some((thought) => thought.category === null)
               ? 'sort'
+              : requestedPhase === 'sort' &&
+                  thoughts.every((thought) => thought.category !== null)
+                ? 'reflection'
               : requestedPhase
         return { ...current, thoughts, history, phase }
       },

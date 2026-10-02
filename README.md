@@ -40,4 +40,6 @@ Brand artwork is stored in `src/assets/brand`, mascot illustrations in `src/asse
 
 The Add cards screen lets users write concerns, add one randomly chosen example at a time, remove cards, and continue to the next phase. The examples come from `src/features/setup/examples.ts` and never repeat an existing card with the same text. Session data is managed by Zustand and saved to `sessionStorage` so a refresh keeps the current cards and phase in the same tab.
 
-The Sort phase currently displays a handoff with the collected cards. Its sorting interaction and the reflection view are planned for the following steps.
+## Step 2
+
+The Sort cards screen presents one uncategorized card at a time. Swipe it left or use **Rest It Here** to set it aside; swipe right or use **In My Hands** for something actionable. Cards and decisions remain in the same tab after a refresh. Returning to Step 1 keeps decisions, so newly added cards are the next ones to sort. Once every card has a category, the app advances to the reflection handoff. The full reflection view is planned for Step 3.
