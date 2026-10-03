@@ -1,6 +1,7 @@
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
-import { Check, RotateCcw } from 'lucide-react'
+import { Check } from 'lucide-react'
 import toocaLogo from '@/assets/brand/tooca-logo.svg'
+import { ReflectionScreen } from '@/features/reflection/ReflectionScreen'
 import { SetupScreen } from '@/features/setup/SetupScreen'
 import { SortScreen } from '@/features/sort/SortScreen'
 import { useSessionStore } from '@/store/session'
@@ -34,28 +35,12 @@ function StepIndicator({ phase }: { phase: 'setup' | 'sort' | 'reflection' }) {
   )
 }
 
-function ReflectionHandoff() {
-  const resetSession = useSessionStore((state) => state.resetSession)
-  return (
-    <section className="handoff-screen" aria-labelledby="reflection-heading">
-      <div>
-        <p className="handoff-screen__eyebrow">Your reflection</p>
-        <h1 id="reflection-heading">All sorted, for now.</h1>
-        <p>You can begin again whenever you like.</p>
-        <button type="button" onClick={resetSession} className="handoff-screen__back">
-          <RotateCcw size={18} aria-hidden="true" /> Begin again
-        </button>
-      </div>
-    </section>
-  )
-}
-
 function App() {
   const phase = useSessionStore((state) => state.phase)
   const reduceMotion = useReducedMotion()
 
   return (
-    <div className="flow-shell">
+    <div className={`flow-shell ${phase === 'reflection' ? 'flow-shell--reflection' : ''}`}>
       <header className="flow-header">
         <div className="flow-header__inner">
           <a href="#main" aria-label="Tooca, skip to main content" className="flow-header__logo">
@@ -64,7 +49,7 @@ function App() {
           <StepIndicator phase={phase} />
         </div>
       </header>
-      <main id="main" className={`flow-main ${phase === 'sort' ? 'flow-main--sort' : ''}`}>
+      <main id="main" className={`flow-main ${phase === 'sort' ? 'flow-main--sort' : phase === 'reflection' ? 'flow-main--reflection' : ''}`}>
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={phase}
@@ -79,7 +64,7 @@ function App() {
             ) : phase === 'sort' ? (
               <SortScreen />
             ) : (
-              <ReflectionHandoff />
+              <ReflectionScreen />
             )}
           </motion.div>
         </AnimatePresence>

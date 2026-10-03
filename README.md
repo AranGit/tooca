@@ -42,4 +42,8 @@ The Add cards screen lets users write concerns, add one randomly chosen example 
 
 ## Step 2
 
-The Sort cards screen presents one uncategorized card at a time. Swipe it left or use **Rest It Here** to set it aside; swipe right or use **In My Hands** for something actionable. Cards and decisions remain in the same tab after a refresh. Returning to Step 1 keeps decisions, so newly added cards are the next ones to sort. Once every card has a category, the app advances to the reflection handoff. The full reflection view is planned for Step 3.
+The Sort cards screen presents one uncategorized card at a time. Swipe it left or use **Rest It Here** to set it aside; swipe right or use **In My Hands** for something actionable. Cards and decisions remain in the same tab after a refresh. Returning to Step 1 keeps decisions, so newly added cards are the next ones to sort. Once every card has a category, the app advances to reflection.
+
+## Step 3
+
+The Reflection screen summarizes cards under **In My Hands** and **Rest It Here**. Both sections can expand or collapse independently, and cards retain the order in which they were added. **Bring it back** returns the most recently sorted card to Step 2 while preserving earlier choices. **Begin again** clears the session and returns to Step 1. The current phase, cards, and decision history survive a refresh in the same tab.

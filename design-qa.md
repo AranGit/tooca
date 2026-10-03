@@ -73,4 +73,28 @@
 
 - [P3] Mascot rendering and the background gradient differ subtly from the flattened source screenshots. The original SVG artwork is retained.
 
+## Step 3
+
+**Findings**
+
+- No P0/P1/P2 layout or interaction differences remain in the reflection screen. The desktop content width, accordion positions, mobile vertical rhythm, and bottom actions follow the references.
+
+**Evidence**
+
+- Source visual truth: `../Step 2 - 3/3.1 REFLECTION/Desktop.png` (1440 × 1024) and `../Step 2 - 3/3 FINISHED SORTING/Balance.png` (402 × 874).
+- Rendered implementation: `qa/step3/desktop-1440x1024.png`, `qa/step3/mobile-402x812.png`, and `qa/step3/tablet-780x900.png`.
+- Side-by-side full-view comparison: `qa/step3/comparison.png`. Desktop captures are shown at 50%; the mobile source's 62-pixel device status bar is cropped so both app areas measure 402 × 812. All four primary captures show the same one-card/two-card category split and the same first concern.
+- Browser checks: opening the second accordion, refreshing during reflection, returning the latest decision to sorting, categorizing it again, and resetting the session. A 320 × 667 viewport with 20 cards was checked for horizontal overflow and action overlap. No runtime errors appeared in the desktop, mobile, or tablet captures.
+
+**Fidelity review**
+
+- Typography and copy: bundled Gotham Rounded, title, description, category counts, card text, and action labels match the references.
+- Layout: desktop accordions begin at x=348/y=330 with 744 px width; mobile accordions begin at x=16/y=349 with 370 px width. The actions stay near the viewport bottom with clear margin, and long content scrolls without overlapping them.
+- Colors and assets: the reflection background and mint/coral sections follow the source. The supplied Mooca happy SVG is used for the illustration.
+- States: both categories can expand independently, empty categories have a message, and card order follows the original entry order. The two actions preserve or clear session state as intended.
+
+**Follow-up polish**
+
+- [P3] The supplied happy SVG uses a different sun and character pose from the flattened reflection mockup; its placement and scale are aligned while retaining the original reusable artwork.
+
 final result: passed
