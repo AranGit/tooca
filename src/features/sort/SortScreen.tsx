@@ -2,12 +2,19 @@ import { animate, motion, useMotionValue, useReducedMotion, useTransform } from 
 import type { PanInfo } from 'motion/react'
 import { ArrowLeft, ArrowRight, RotateCcw } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
+import { colorAccentBlue500, colorPrimary500, colorSystemError500 } from '@/styles/generated-colors'
 import moocaHappy from '@/assets/mascot/mooca-happy.svg'
 import moocaHugging from '@/assets/mascot/mooca-hugging.svg'
 import moocaUsingPhone from '@/assets/mascot/mooca-using-phone.svg'
 import { useSessionStore } from '@/store/session'
 import type { Category, Thought } from '@/store/session'
 import './sort.css'
+
+const dragColors = [
+  colorSystemError500,
+  colorAccentBlue500,
+  colorPrimary500,
+]
 
 export function SortScreen() {
   const thoughts = useSessionStore((state) => state.thoughts)
@@ -37,12 +44,14 @@ function SortTurn({ current, remaining, total }: { current: Thought; remaining: 
   const cardRef = useRef<HTMLDivElement>(null)
   const x = useMotionValue(0)
   const rotate = useTransform(x, [-135, 0, 135], reduceMotion ? [0, 0, 0] : [-12, 0, 12])
-  const color = useTransform(x, [-120, 0, 120], ['#f57575', '#207dea', '#00bfb3'])
-  const shadow = useTransform(x, [-120, 0, 120], [
-    '0px 18px 26px rgba(245,117,117,0.25)',
-    '0px 8px 12px rgba(37,126,217,0.09)',
-    '0px 18px 26px rgba(0,191,179,0.25)',
-  ])
+  const color = useTransform(x, [-120, 0, 120], dragColors)
+  const shadow = useTransform(x, (offset) => {
+    const strength = Math.min(Math.abs(offset) / 120, 1)
+    const shadowColor = offset < 0
+      ? 'var(--color-system-error-500)'
+      : offset > 0 ? 'var(--color-primary-500)' : 'var(--color-accent-blue-500)'
+    return `0 ${8 + 10 * strength}px ${12 + 14 * strength}px color-mix(in srgb, ${shadowColor} ${9 + 16 * strength}%, transparent)`
+  })
 
   useEffect(() => {
     mounted.current = true

@@ -61,7 +61,7 @@
 
 - Typography: bundled Gotham Rounded reproduces the headline and card hierarchy; the example card fits on one line in both target viewports.
 - Spacing and layout: the desktop card is 500 × 242 at x=462/y=411 versus roughly x=460/y=410 in the source. The mobile card is 330 × 172 at x=36/y=436 versus roughly x=36/y=438 in the cropped source. The controls retain clear bottom space.
-- Colors and tokens: the blue card and gradient follow the supplied palette. The two action fills are darker than the reference to keep white button text at accessible contrast; the category meanings remain clear.
+- Colors and tokens: the blue card and gradient follow the supplied palette. The action fills now use the supplied primary and error tokens; their contrast finding is recorded under the full interaction references below.
 - Image quality: the supplied mascot SVGs are used directly; desktop art sits in the source's colored oval regions and the mobile phone mascot sits above the card.
 - Copy and content: heading, guidance, category labels, and example card copy match the source.
 
@@ -90,7 +90,7 @@
 
 - Typography and copy: bundled Gotham Rounded, title, description, category counts, card text, and action labels match the references.
 - Layout: desktop accordions begin at x=348/y=330 with 744 px width; mobile accordions begin at x=16/y=349 with 370 px width. The actions stay near the viewport bottom with clear margin, and long content scrolls without overlapping them.
-- Colors and assets: the reflection background and mint/coral sections follow the source. The supplied Mooca happy SVG is used for the illustration.
+- Colors and assets: the reflection background uses `gray/100` as subsequently requested; the mint/coral sections use the supplied tokens. The supplied Mooca happy SVG is used for the illustration.
 - States: both categories can expand independently, empty categories have a message, and card order follows the original entry order. The two actions preserve or clear session state as intended.
 
 **Follow-up polish**
@@ -104,6 +104,12 @@
 - Layout: the neutral card, fixed blue underlay, directional overlap over the mascots, approximately ±12° rotation, final-card size, and undo action follow the full reference set. The heading, category copy, bundled font, and original mascot assets are retained. Long text wraps naturally; the last example uses two balanced lines rather than a hard-coded break after “What if”.
 - Behavior: the browser verification covers both drag directions and their live colors, cancelled drag returning to blue, repeated button clicks, undo, refresh, final completion, reduced motion, and horizontal overflow. The undo action has a reserved slot above the hint and buttons.
 - Visual follow-up: mascot contours and the gradient remain slightly different from the flattened references. No actionable overlap or clipping was found in the tested viewports.
-- Accessibility finding: matching the reference introduces insufficient color contrast. White button labels measure 2.73:1 on coral and 2.30:1 on teal (required 4.5:1). Large colored card text during drag measures the same ratios on white (required 3:1). All six Step 2 Storybook cases consequently report this finding; the accessibility checks have not been disabled. A future accessibility revision needs darker colors or different text colors.
+- Accessibility finding: the supplied error/500 and primary/500 colors introduce insufficient color contrast. White button labels measure 2.77:1 on coral and 2.19:1 on teal (required 4.5:1). Large colored card text during drag measures the same ratios on white (required 3:1). All six Step 2 Storybook cases consequently report this finding; the accessibility checks have not been disabled. A future accessibility revision needs darker colors or different text colors.
+
+## Design token audit
+
+- Replaced raw application colors with supplied palette tokens throughout setup, sorting, and reflection. The sorting card's Motion colors now read the same token JSON as the generated CSS.
+- Replaced existing raw corner radii with radius tokens, adding `xs` (4 px) and `md` (12 px) for the recurring card corners. Unique layout measurements and typographic foundation definitions remain component values.
+- `npm run tokens:check` now detects raw application color and corner-radius values outside the generated token file and visual assets. Typecheck, lint, unit tests, build, and browser sorting flow passed after the migration; the existing six Storybook contrast findings remain.
 
 final result: visual and interaction checks passed; accessibility color contrast remains unresolved to preserve the approved reference colors.

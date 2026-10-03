@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "tokens": "node scripts/generate-tokens.mjs",
+    "tokens:check": "node scripts/check-design-token-usage.mjs",
     "predev": "npm run tokens",
     "dev": "vite",
     "prebuild": "npm run tokens",

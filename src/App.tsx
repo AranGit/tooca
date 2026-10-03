@@ -23,7 +23,7 @@ function StepIndicator({ phase }: { phase: 'setup' | 'sort' | 'reflection' }) {
         <span className="step-indicator__number">{firstDone ? <Check size={12} aria-hidden="true" /> : '1'}</span>
         <span>Add cards</span>
       </button>
-      <span className="step-indicator__line" aria-hidden="true" />
+      <span className={`step-indicator__line${firstDone ? ' is-complete' : ''}`} aria-hidden="true" />
       <span
         className={`step-indicator__step ${secondDone ? 'is-complete' : phase === 'sort' ? 'is-current' : 'is-upcoming'}`}
         aria-current={phase === 'sort' ? 'step' : undefined}

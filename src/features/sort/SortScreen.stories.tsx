@@ -64,7 +64,10 @@ async function holdDrag(canvasElement: HTMLElement, direction: number) {
   fireEvent.pointerMove(window, { ...pointer, clientX: start.clientX + direction * 10 })
   await new Promise(requestAnimationFrame)
   fireEvent.pointerMove(window, { ...pointer, clientX: start.clientX + direction * 150 })
-  await waitFor(() => expect(getComputedStyle(card).color).toBe(direction > 0 ? 'rgb(0, 191, 179)' : 'rgb(245, 117, 117)'))
+  const categoryButton = canvasElement.querySelector(
+    direction > 0 ? '.sort-screen__button--hands' : '.sort-screen__button--rest',
+  )!
+  await waitFor(() => expect(getComputedStyle(card).color).toBe(getComputedStyle(categoryButton).backgroundColor))
 }
 
 export const DragRight: Story = {

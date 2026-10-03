@@ -1,5 +1,5 @@
 .flow-shell.flow-shell--reflection {
-  background: linear-gradient(180deg, #dbf0ee 0%, #e4f4f3 52%, #fff 84%);
+  background: var(--color-gray-100);
 }
 
 .flow-main.flow-main--reflection {
@@ -31,7 +31,7 @@
 
 .reflection-screen__copy h1 {
   margin: 0;
-  color: #050505;
+  color: var(--color-gray-1000);
   font-size: 36px;
   font-weight: 700;
   line-height: 40px;
@@ -39,7 +39,7 @@
 
 .reflection-screen__copy p {
   margin: 12px 0 0;
-  color: #555;
+  color: var(--color-gray-800);
   font-size: 14px;
   font-weight: 325;
   line-height: 20px;
@@ -67,18 +67,18 @@
 
 .reflection-group {
   border: 1px solid;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   overflow: hidden;
 }
 
 .reflection-group--hands {
   border-color: var(--color-primary-500);
-  background: #e0f8f6;
+  background: var(--color-primary-50);
 }
 
 .reflection-group--rest {
   border-color: var(--color-system-error-500);
-  background: #fdefee;
+  background: var(--color-system-error-50);
 }
 
 .reflection-group__toggle {
@@ -89,7 +89,7 @@
   padding: 12px;
   border: 0;
   background: transparent;
-  color: #111;
+  color: var(--color-gray-1000);
   text-align: left;
   cursor: pointer;
 }
@@ -101,8 +101,8 @@
   width: 24px;
   height: 24px;
   flex: none;
-  border-radius: 50%;
-  color: white;
+  border-radius: var(--radius-circle);
+  color: var(--color-gray-0);
 }
 
 .reflection-group--hands .reflection-group__icon {
@@ -124,7 +124,7 @@
 .reflection-group__count {
   margin-left: 10px;
   padding-left: 10px;
-  border-left: 1px solid #9ee0db;
+  border-left: 1px solid var(--color-primary-100);
   font-size: 14px;
   font-weight: 325;
   line-height: 20px;
@@ -132,7 +132,7 @@
 }
 
 .reflection-group--rest .reflection-group__count {
-  border-left-color: #f5bbb8;
+  border-left-color: var(--color-system-error-200);
 }
 
 .reflection-group__chevron {
@@ -163,9 +163,9 @@
   gap: 14px;
   min-height: 36px;
   padding: 8px 10px;
-  border-radius: 4px;
-  background: #fbfbfb;
-  color: #111;
+  border-radius: var(--radius-xs);
+  background: var(--color-gray-50);
+  color: var(--color-gray-1000);
   font-size: 16px;
   font-weight: 325;
   line-height: 20px;
@@ -174,7 +174,7 @@
 
 .reflection-group__number {
   flex: none;
-  color: #686868;
+  color: var(--color-gray-700);
   font-size: 16px;
   font-weight: 350;
 }
@@ -182,9 +182,9 @@
 .reflection-group__empty {
   margin: 0 12px 12px;
   padding: 8px 10px;
-  border-radius: 4px;
-  background: #fbfbfb;
-  color: #686868;
+  border-radius: var(--radius-xs);
+  background: var(--color-gray-50);
+  color: var(--color-gray-700);
   font-size: 14px;
   line-height: 20px;
 }
@@ -217,7 +217,7 @@
 }
 
 .reflection-screen__bring-back:disabled {
-  color: #8c8c8c;
+  color: var(--color-gray-600);
   cursor: not-allowed;
 }
 
@@ -226,8 +226,8 @@
   min-height: 44px;
   padding: 8px 18px;
   border: 2px solid var(--color-accent-blue-500);
-  border-radius: 999px;
-  background: white;
+  border-radius: var(--radius-circle);
+  background: var(--color-gray-0);
   color: var(--color-accent-blue-700);
   cursor: pointer;
   font-size: 16px;
@@ -273,10 +273,6 @@
 }
 
 @media (max-width: 700px) {
-  .flow-shell.flow-shell--reflection {
-    background: linear-gradient(180deg, #fdfdfd 0%, #fbfbfb 28%);
-  }
-
   .reflection-screen {
     padding-bottom: 24px;
   }

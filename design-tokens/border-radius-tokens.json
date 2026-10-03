@@ -9,6 +9,10 @@
       ]
     }
   },
+  "radius-xs": {
+    "$type": "number",
+    "$value": 4
+  },
   "radius-sm": {
     "$type": "number",
     "$value": 8,
@@ -18,6 +22,10 @@
         "ALL_SCOPES"
       ]
     }
+  },
+  "radius-md": {
+    "$type": "number",
+    "$value": 12
   },
   "radius-lg": {
     "$type": "number",

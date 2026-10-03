@@ -77,7 +77,9 @@
   --token-color-gray-turquoise-200: #3F6866;
   --token-color-gray-turquoise-300: #355956;
   --token-radius-none: 0px;
+  --token-radius-xs: 4px;
   --token-radius-sm: 8px;
+  --token-radius-md: 12px;
   --token-radius-lg: 24px;
   --token-radius-circle: 999px;
 }
@@ -160,7 +162,9 @@
   --color-gray-turquoise-200: var(--token-color-gray-turquoise-200);
   --color-gray-turquoise-300: var(--token-color-gray-turquoise-300);
   --radius-none: var(--token-radius-none);
+  --radius-xs: var(--token-radius-xs);
   --radius-sm: var(--token-radius-sm);
+  --radius-md: var(--token-radius-md);
   --radius-lg: var(--token-radius-lg);
   --radius-circle: var(--token-radius-circle);
 }

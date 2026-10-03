@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { mkdir } from 'node:fs/promises'
 import { chromium } from 'playwright'
 
-const output = 'qa/step2-full'
+const output = process.env.TOOCA_QA_OUTPUT ?? 'qa/step2-full'
 await mkdir(output, { recursive: true })
 const browser = await chromium.launch({ headless: true })
 const thoughts = [
@@ -44,7 +44,7 @@ try {
   await page.screenshot({ path: `${output}/01-idle.png` })
   assert.equal(await page.getByRole('button', { name: 'Bring it back' }).count(), 0)
   const right = await drag(page, 135)
-  assert.equal(right.color, 'rgb(0, 191, 179)')
+  assert.equal(right.color, await page.locator('.sort-screen__button--hands').evaluate(el => getComputedStyle(el).backgroundColor))
   assert.notEqual(right.transform, 'none')
   await page.screenshot({ path: `${output}/02-drag-right.png` })
   await page.mouse.up()
@@ -59,7 +59,7 @@ try {
   await page.waitForTimeout(250)
   assert.equal((await history(page)).length, 0)
   const left = await drag(page, -135)
-  assert.equal(left.color, 'rgb(245, 117, 117)')
+  assert.equal(left.color, await page.locator('.sort-screen__button--rest').evaluate(el => getComputedStyle(el).backgroundColor))
   await page.screenshot({ path: `${output}/03-drag-left.png` })
   await page.mouse.up()
   await page.getByRole('group', { name: 'Card 2 of 2' }).waitFor()
@@ -69,7 +69,15 @@ try {
   await page.mouse.up()
   await page.waitForTimeout(650)
   assert.equal((await history(page)).length, 0)
-  assert.equal(await page.locator('.sort-deck__card').evaluate(el => getComputedStyle(el).color), 'rgb(32, 125, 234)')
+  const neutralColor = await page.evaluate(() => {
+    const sample = document.createElement('span')
+    sample.style.color = 'var(--color-accent-blue-500)'
+    document.body.appendChild(sample)
+    const value = getComputedStyle(sample).color
+    sample.remove()
+    return value
+  })
+  assert.equal(await page.locator('.sort-deck__card').evaluate(el => getComputedStyle(el).color), neutralColor)
   await page.getByRole('button', { name: 'In My Hands' }).dblclick()
   await page.getByRole('group', { name: 'Card 2 of 2' }).waitFor()
   assert.equal((await history(page)).length, 1)
