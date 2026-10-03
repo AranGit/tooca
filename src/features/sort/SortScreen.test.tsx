@@ -15,7 +15,7 @@ describe('SortScreen', () => {
       phase: 'sort',
       thoughts: [
         { id: 'first', text: 'Job interview tomorrow.', category: null },
-        { id: 'second', text: 'What if they don’t like me?', category: null },
+        { id: 'second', text: "What if they don't like me?", category: null },
       ],
       history: [],
     })
@@ -26,7 +26,7 @@ describe('SortScreen', () => {
     await user.click(screen.getByRole('button', { name: 'Rest It Here' }))
 
     await waitFor(() => {
-      expect(screen.getByRole('group', { name: 'Card 2 of 2' })).toHaveTextContent('What if they don’t like me?')
+      expect(screen.getByRole('group', { name: 'Card 2 of 2' })).toHaveTextContent("What if they don't like me?")
     })
     await user.click(screen.getByRole('button', { name: 'In My Hands' }))
 

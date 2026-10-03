@@ -93,7 +93,7 @@ function SortTurn({ current, remaining, total }: { current: Thought; remaining: 
   return (
     <section className="sort-screen" aria-labelledby="sort-title">
       <div className="sort-screen__intro">
-        <h1 id="sort-title">What’s in your hands right now?</h1>
+        <h1 id="sort-title">What's in your hands right now?</h1>
         <p>There are no wrong answers. Just take it one card at a time.</p>
       </div>
       <div className="sort-screen__scene">

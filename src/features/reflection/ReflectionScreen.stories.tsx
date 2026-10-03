@@ -18,7 +18,7 @@ type Story = StoryObj<typeof meta>
 
 const thoughts: Thought[] = [
   { id: 'interview', text: 'Job interview tomorrow.', category: 'in-my-hands' },
-  { id: 'opinion', text: 'What if they don’t like me?', category: 'rest-it-here' },
+  { id: 'opinion', text: "What if they don't like me?", category: 'rest-it-here' },
   { id: 'deadline', text: 'I might miss a deadline.', category: 'rest-it-here' },
 ]
 
@@ -42,7 +42,7 @@ export const EmptyCategory: Story = {
 export const LongText: Story = {
   args: {
     thoughts: [
-      { id: 'long', text: 'I am worried that I will not have enough time to finish everything I promised before tomorrow’s meeting.', category: 'in-my-hands' },
+      { id: 'long', text: "I am worried that I will not have enough time to finish everything I promised before tomorrow's meeting.", category: 'in-my-hands' },
       ...thoughts,
     ],
     history: [

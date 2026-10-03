@@ -8,7 +8,7 @@ import { useSessionStore } from '@/store/session'
 import { pickExamples, WORRY_EXAMPLES } from './examples'
 
 function cardCountLabel(count: number) {
-  return `Let’s sort these ${count} ${count === 1 ? 'thing' : 'things'}`
+  return `Let's sort these ${count} ${count === 1 ? 'thing' : 'things'}`
 }
 
 export function SetupScreen() {
@@ -42,8 +42,8 @@ export function SetupScreen() {
     <section className="setup-screen" aria-labelledby="setup-title">
       <div className="setup-intro">
         <div className="setup-intro__copy">
-          <h1 id="setup-title">What’s on your mind<br className="desktop-break" /> right now?</h1>
-          <p>Take your time, let’s lay them out one by one.</p>
+          <h1 id="setup-title">What's on your mind<br className="desktop-break" /> right now?</h1>
+          <p>Take your time, let's lay them out one by one.</p>
         </div>
         <img
           className="setup-intro__mascot"

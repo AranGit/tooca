@@ -7,7 +7,7 @@ await mkdir(output, { recursive: true })
 const browser = await chromium.launch({ headless: true })
 const thoughts = [
   { id: 'first', text: 'Job interview tomorrow.', category: null },
-  { id: 'second', text: 'What if they don’t like me?', category: null },
+  { id: 'second', text: "What if they don't like me?", category: null },
 ]
 const errors = []
 async function open(width, height, reducedMotion = 'no-preference') {

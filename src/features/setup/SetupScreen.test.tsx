@@ -16,14 +16,14 @@ describe('SetupScreen', () => {
     const input = screen.getByRole('textbox', { name: 'Things on your mind' })
 
     expect(screen.getByRole('button', { name: 'Add another' })).toBeDisabled()
-    expect(screen.getByRole('button', { name: /Let’s sort these 0 things/ })).toBeDisabled()
+    expect(screen.getByRole('button', { name: /Let's sort these 0 things/ })).toBeDisabled()
 
-    await user.type(input, '  Tomorrow’s meeting  {Enter}')
+    await user.type(input, "  Tomorrow's meeting  {Enter}")
 
-    expect(within(screen.getByRole('list', { name: 'Things on your mind' })).getByText('Tomorrow’s meeting')).toBeInTheDocument()
+    expect(within(screen.getByRole('list', { name: 'Things on your mind' })).getByText("Tomorrow's meeting")).toBeInTheDocument()
     expect(input).toHaveValue('')
     expect(input).toHaveFocus()
-    expect(screen.getByRole('button', { name: /Let’s sort these 1 thing/ })).toBeEnabled()
+    expect(screen.getByRole('button', { name: /Let's sort these 1 thing/ })).toBeEnabled()
   })
 
   it('keeps user cards, appends unique examples, removes a chosen card, and continues', async () => {
@@ -44,7 +44,7 @@ describe('SetupScreen', () => {
     await user.click(screen.getByRole('button', { name: 'Remove: My own concern' }))
     expect(useSessionStore.getState().thoughts).toHaveLength(2)
 
-    await user.click(screen.getByRole('button', { name: /Let’s sort these 2 things/ }))
+    await user.click(screen.getByRole('button', { name: /Let's sort these 2 things/ }))
     expect(useSessionStore.getState().phase).toBe('sort')
     expect(JSON.parse(sessionStorage.getItem('tooca-session') ?? '{}').state.phase).toBe('sort')
   })

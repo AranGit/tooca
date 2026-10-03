@@ -11,7 +11,7 @@ beforeEach(() => {
     phase: 'reflection',
     thoughts: [
       { id: 'first', text: 'Job interview tomorrow.', category: 'in-my-hands' },
-      { id: 'second', text: 'What if they don’t like me?', category: 'rest-it-here' },
+      { id: 'second', text: "What if they don't like me?", category: 'rest-it-here' },
       { id: 'third', text: 'I might miss a deadline.', category: 'rest-it-here' },
     ],
     history: [
@@ -35,7 +35,7 @@ describe('ReflectionScreen', () => {
 
     await user.click(rest)
     expect(rest).toHaveAttribute('aria-expanded', 'true')
-    expect(screen.getByText('What if they don’t like me?')).toBeVisible()
+    expect(screen.getByText("What if they don't like me?")).toBeVisible()
     expect(screen.getByText('I might miss a deadline.')).toBeVisible()
     expect(hands).toHaveAttribute('aria-expanded', 'true')
   })
