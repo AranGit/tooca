@@ -16,9 +16,11 @@ A gentle, interactive space to put worries into words, sort them one at a time, 
 
 | The problem | The audience | The approach |
 | :--- | :--- | :--- |
-| Under stress, the boundary between what we can and cannot control can feel blurred. Tangled concerns can feed overthinking and overwhelm. | Working professionals and students facing immediate stressors who want a quick moment of mindfulness and a way to approach concerns one at a time. | Turn the **Circle of Control** concept into a simple card-sorting experience: write, swipe, and reflect. |
+| Under stress, the boundary between what we can and cannot control can feel blurred. Tangled concerns can feed overthinking and overwhelm. | University students and early-career or working professionals facing immediate stressors who want a quick moment of reflection and a way to approach concerns one at a time. | Turn the **Circle of Control** concept into a simple card-sorting experience: write, swipe, and reflect. |
 
 The design hypothesis is that a physical sorting action can help people move from repeatedly thinking about a worry to making a concrete choice about it. Tooca uses gentle, game-like interaction without scores or time pressure. This is the product rationale, not a measured claim of clinical effectiveness.
+
+The audience choice is documented with 2025+ Thai student research, Thai workforce data, and public-health context in the [product & experience guide](docs/product.md#research-basis). Help validate the experience through the [Tooca UX/UI Feedback Survey](https://forms.gle/kHDn2k6e9cXh1Jfy9). Tooca is a self-guided reflection tool, not a diagnostic, crisis, or treatment service.
 
 ## The experience at a glance
 

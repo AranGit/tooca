@@ -10,10 +10,29 @@ Tooca is designed around one immediate need: **help me separate these thoughts s
 
 ## Target audience
 
+Tooca focuses on adults and older students who are experiencing everyday stress or overthinking. It is a self-guided reflection tool, not a diagnostic, crisis, or treatment service.
+
 | Audience | Immediate context | Intended value |
 | :--- | :--- | :--- |
-| Working professionals | An interview, deadline, difficult conversation, or unanswered message | A short pause to distinguish personal actions from uncertain outcomes |
-| Students | A presentation, workload, application, or social concern | A simple way to name worries and decide what deserves attention now |
+| University students | A presentation, deadline, application, workload, or social concern | A simple way to name worries and decide what deserves attention now |
+| Early-career and working professionals | An interview, deadline, difficult conversation, unanswered message, or work-life pressure | A short pause to distinguish personal actions from uncertain outcomes |
+
+### Research basis
+
+The audience definition is grounded in recent Thai research and workforce data. These sources indicate a need for accessible, low-pressure support; they do not establish that Tooca reduces stress or treats a mental-health condition.
+
+| Source | Relevant finding | Design implication |
+| :--- | :--- | :--- |
+| [Jaikham et al. (2025), *Stress Among Freshmen Students at Chiang Rai Rajabhat University*](https://so02.tci-thaijo.org/index.php/larts-journal/article/view/274519) | In a stratified sample of 400 first-year students, 43.5% reported severe stress. The finding is specific to this university sample. | Prioritize academic deadlines, presentations, workload, and social concerns in examples and usability testing. |
+| [Thanasupawat et al. (2025), *Factors Affecting Stress and Stress Management of Students*](https://so08.tci-thaijo.org/index.php/dhammalife/article/view/5377) | A study of 335 education students found health and environmental factors significantly associated with stress. | Keep the activity short, private, and usable across varying study environments. |
+| [Gallup, *State of the Global Workplace: Thailand*](https://www.gallup.com/workplace/707378/state-global-workplace-thailand-country-level-data.aspx) | For 2025, 25% of Thai employees said they experienced a lot of stress the previous day. The report was published in 2026 using 2025 data. | Support short, in-the-moment use around work pressure rather than requiring a long wellness session. |
+| [Thai Health Report 2025](https://www.thaihealth.or.th/p/08MmLMvL3) | ThaiHealth and Mahidol University frame mental health as a national public-health concern; the report cites 13.4 million Thai people who have experienced a mental-health problem or psychiatric condition at least once. | Use non-stigmatizing language and retain clear boundaries between reflective support and professional care. |
+
+All cited publications or datasets are from 2025 onward. The student studies are not national prevalence estimates, so they should be used as context for the selected audience rather than as claims about all Thai students.
+
+### UX/UI feedback survey
+
+[Tooca UX/UI Feedback Survey](https://forms.gle/kHDn2k6e9cXh1Jfy9) collects user feedback on the product experience. It is an evaluation instrument for testing the design hypothesis and should not be presented as published research or evidence of clinical effectiveness. Feedback from the survey can be used to assess comprehension of the two categories, ease of completing the flow, perceived usefulness, and opportunities to improve the interface.
 
 ## The approach
 
