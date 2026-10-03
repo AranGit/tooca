@@ -40,4 +40,43 @@ describe('SortScreen', () => {
       'first', 'second',
     ])
   })
+  it('undoes decisions in reverse order and hides undo when history is empty', async () => {
+    useSessionStore.setState({
+      phase: 'sort',
+      thoughts: [
+        { id: 'first', text: 'First worry', category: 'in-my-hands' },
+        { id: 'second', text: 'Second worry', category: 'rest-it-here' },
+        { id: 'third', text: 'Third worry', category: null },
+      ],
+      history: [
+        { thoughtId: 'first', previousCategory: null, nextCategory: 'in-my-hands' },
+        { thoughtId: 'second', previousCategory: null, nextCategory: 'rest-it-here' },
+      ],
+    })
+    const user = userEvent.setup()
+    render(<SortScreen />)
+    await user.click(screen.getByRole('button', { name: 'Bring it back' }))
+    expect(screen.getByRole('group', { name: 'Card 2 of 3' })).toHaveTextContent('Second worry')
+    await user.click(screen.getByRole('button', { name: 'Bring it back' }))
+    expect(screen.getByRole('group', { name: 'Card 1 of 3' })).toHaveTextContent('First worry')
+    expect(screen.queryByRole('button', { name: 'Bring it back' })).not.toBeInTheDocument()
+    expect(useSessionStore.getState().thoughts.every((thought) => thought.category === null)).toBe(true)
+  })
+
+  it('records one decision when a category button is clicked repeatedly', async () => {
+    useSessionStore.setState({
+      phase: 'sort',
+      thoughts: [
+        { id: 'first', text: 'First worry', category: null },
+        { id: 'second', text: 'Second worry', category: null },
+      ],
+      history: [],
+    })
+    const user = userEvent.setup()
+    render(<SortScreen />)
+    await user.dblClick(screen.getByRole('button', { name: 'In My Hands' }))
+    await waitFor(() => expect(screen.getByRole('group', { name: 'Card 2 of 2' })).toBeVisible())
+    expect(useSessionStore.getState().history).toHaveLength(1)
+  })
+
 })

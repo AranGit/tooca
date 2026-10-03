@@ -78,6 +78,8 @@
 
 .sort-screen__center {
   min-width: 0;
+  position: relative;
+  z-index: 2;
 }
 
 .sort-screen__mobile-mascot {
@@ -93,11 +95,11 @@
 
 .sort-deck__underlay {
   position: absolute;
-  inset: 12px 16px -12px;
+  inset: 26px 16px -12px;
   border: 3px solid #69b7ec;
   border-radius: 11px;
   background: white;
-  box-shadow: 0 4px 0 #bbdfef;
+  box-shadow: 0 4px 8px rgb(37 126 217 / 6%);
 }
 
 .sort-deck__card {
@@ -129,7 +131,35 @@
 }
 
 .sort-screen__actions {
+  position: relative;
   text-align: center;
+}
+
+.sort-screen__undo-slot {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  height: 64px;
+}
+
+.sort-screen__undo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  color: var(--color-accent-blue-700);
+  font-size: 16px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.sort-screen__undo:disabled {
+  opacity: 0.5;
+  cursor: default;
 }
 
 .sort-screen__actions p {
@@ -173,11 +203,11 @@
 }
 
 .sort-screen__button--rest {
-  background: #c84e4a;
+  background: #f57575;
 }
 
 .sort-screen__button--hands {
-  background: #008277;
+  background: #00bfb3;
 }
 
 @media (max-width: 1100px) {
@@ -284,4 +314,30 @@
   .sort-screen__button {
     transition: none;
   }
+}
+
+.flow-shell:has(.sort-screen) {
+  overflow-x: clip;
+  background: linear-gradient(180deg, #dbf0ee 0%, #e4f4f3 52%, #fff 84%);
+}
+
+@media (min-width: 1101px) {
+  .sort-deck--last {
+    width: calc(100% - 30px);
+    height: 232px;
+    margin: 38px auto 0;
+  }
+}
+
+@media (max-width: 1100px) {
+  .sort-screen__scene { padding-bottom: 76px; }
+}
+
+.sort-deck--last .sort-deck__card span {
+  max-width: 260px;
+  text-wrap: balance;
+}
+
+.flow-shell:has(.sort-screen) .flow-header {
+  background: rgb(255 255 255 / 35%);
 }

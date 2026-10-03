@@ -47,3 +47,9 @@ The Sort cards screen presents one uncategorized card at a time. Swipe it left o
 ## Step 3
 
 The Reflection screen summarizes cards under **In My Hands** and **Rest It Here**. Both sections can expand or collapse independently, and cards retain the order in which they were added. **Bring it back** returns the most recently sorted card to Step 2 while preserving earlier choices. **Begin again** clears the session and returns to Step 1. The current phase, cards, and decision history survive a refresh in the same tab.
+
+### Full sorting interaction
+
+Dragging updates the card's angle, border, text, and shadow toward coral (left) or teal (right). Releasing a short drag restores the neutral card; category buttons play the same directional exit. Bring it back undoes decisions one at a time. The final card has no underlay and uses the smaller desktop size from the full reference set.
+
+With the dev server on port 4173, run `node scripts/verify-sort.mjs` for browser interaction checks and screenshots. The supplied reference colors are preserved. Their white button labels and colored drag text currently fail the Storybook color-contrast check; that check remains enabled. See `design-qa.md` for the measured ratios.

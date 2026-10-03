@@ -97,4 +97,13 @@
 
 - [P3] The supplied happy SVG uses a different sun and character pose from the flattened reflection mockup; its placement and scale are aligned while retaining the original reusable artwork.
 
-final result: passed
+## Step 2 — full interaction references
+
+- Source: the four 1440 × 1024 images in `2.1 CATEGORIZE`, `2.2 CATEGORIZE`, `2.3 CATEGORIZE`, and `2.4 CATEGORIZE` under the supplied `OOCA UX_UI Assignment - Aran (1)` download folder.
+- Evidence: `qa/step2-full/comparison.png` places each reference beside its matching browser screenshot at equal 50% scale. Separate full-resolution captures preserve all four states. Additional captures cover 402 × 812, 320 × 667, and 780 × 900.
+- Layout: the neutral card, fixed blue underlay, directional overlap over the mascots, approximately ±12° rotation, final-card size, and undo action follow the full reference set. The heading, category copy, bundled font, and original mascot assets are retained. Long text wraps naturally; the last example uses two balanced lines rather than a hard-coded break after “What if”.
+- Behavior: the browser verification covers both drag directions and their live colors, cancelled drag returning to blue, repeated button clicks, undo, refresh, final completion, reduced motion, and horizontal overflow. The undo action has a reserved slot above the hint and buttons.
+- Visual follow-up: mascot contours and the gradient remain slightly different from the flattened references. No actionable overlap or clipping was found in the tested viewports.
+- Accessibility finding: matching the reference introduces insufficient color contrast. White button labels measure 2.73:1 on coral and 2.30:1 on teal (required 4.5:1). Large colored card text during drag measures the same ratios on white (required 3:1). All six Step 2 Storybook cases consequently report this finding; the accessibility checks have not been disabled. A future accessibility revision needs darker colors or different text colors.
+
+final result: visual and interaction checks passed; accessibility color contrast remains unresolved to preserve the approved reference colors.
