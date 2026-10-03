@@ -1,6 +1,6 @@
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { ArrowRight, Plus, X } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import moocaWelcome from '@/assets/mascot/mooca-welcome.png'
 import moocaUsingPhone from '@/assets/mascot/mooca-using-phone.svg'
@@ -11,9 +11,12 @@ function cardCountLabel(count: number) {
   return `Let's sort these ${count} ${count === 1 ? 'thing' : 'things'}`
 }
 
+const thoughtCharacterLimit = 120
+
 export function SetupScreen() {
   const [draft, setDraft] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
+  const headingRef = useRef<HTMLHeadingElement>(null)
   const reduceMotion = useReducedMotion()
   const thoughts = useFrozenSessionValue((state) => state.thoughts)
   const addThought = useSessionStore((state) => state.addThought)
@@ -24,6 +27,10 @@ export function SetupScreen() {
   const examplesExhausted = WORRY_EXAMPLES.every(
     (example) => existingTexts.has(example.toLocaleLowerCase()),
   )
+
+  useLayoutEffect(() => {
+    headingRef.current?.focus({ preventScroll: true })
+  }, [])
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -42,7 +49,7 @@ export function SetupScreen() {
     <section className="setup-screen" aria-labelledby="setup-title">
       <div className="setup-intro">
         <div className="setup-intro__copy">
-          <h1 id="setup-title">What's on your mind<br className="desktop-break" /> right now?</h1>
+          <h1 ref={headingRef} id="setup-title" tabIndex={-1}>What's on your mind<br className="desktop-break" /> right now?</h1>
           <p>Take your time, let's lay them out one by one.</p>
         </div>
         <img
@@ -72,9 +79,13 @@ export function SetupScreen() {
             value={draft}
             onChange={(event) => setDraft(event.target.value)}
             placeholder="Just a few words is fine..."
-            maxLength={240}
+            maxLength={thoughtCharacterLimit}
+            aria-describedby="thought-character-count"
             autoComplete="off"
           />
+          <p id="thought-character-count" className="thought-form__character-count">
+            {draft.length} / {thoughtCharacterLimit} characters
+          </p>
           <button
             type="submit"
             className="thought-form__add"

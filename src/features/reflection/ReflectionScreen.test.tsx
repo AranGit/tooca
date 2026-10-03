@@ -58,7 +58,7 @@ describe('ReflectionScreen', () => {
     const user = userEvent.setup()
     render(<ReflectionScreen />)
 
-    await user.click(screen.getByRole('button', { name: 'Begin again' }))
+    await user.click(screen.getByRole('button', { name: 'Clear & Begin again' }))
 
     const state = useSessionStore.getState()
     expect(state.phase).toBe('setup')

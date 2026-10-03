@@ -1,7 +1,7 @@
 import { animate, motion, useMotionValue, useReducedMotion, useTransform } from 'motion/react'
 import type { PanInfo } from 'motion/react'
 import { ArrowLeft, ArrowRight, RotateCcw } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { type RefObject, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { colorAccentBlue500, colorPrimary500, colorSystemError500 } from '@/styles/generated-colors'
 import moocaHappy from '@/assets/mascot/mooca-happy.svg'
 import moocaHugging from '@/assets/mascot/mooca-hugging.svg'
@@ -16,22 +16,26 @@ const dragColors = [
   colorPrimary500,
 ]
 
+function cardTextSizeClass(text: string) {
+  if (text.length > 100) return 'sort-deck__card--compact'
+  if (text.length > 75) return 'sort-deck__card--condensed'
+  return ''
+}
+
 export function SortScreen() {
   const thoughts = useFrozenSessionValue((state) => state.thoughts)
   const pending = thoughts.filter((thought) => thought.category === null)
   const current = pending[0]
-  const previousId = useRef(current?.id)
-  // Announce the next card and keep keyboard navigation in the sorting flow.
-  useEffect(() => {
-    if (previousId.current !== current?.id) {
-      previousId.current = current?.id
-      document.querySelector<HTMLElement>('.sort-deck__card')?.focus({ preventScroll: true })
-    }
-  }, [current?.id])
-  return current ? <SortTurn key={current.id} current={current} remaining={pending.length} total={thoughts.length} /> : null
+  const headingRef = useRef<HTMLHeadingElement>(null)
+
+  useLayoutEffect(() => {
+    headingRef.current?.focus({ preventScroll: true })
+  }, [])
+
+  return current ? <SortTurn key={current.id} current={current} remaining={pending.length} total={thoughts.length} headingRef={headingRef} /> : null
 }
 
-function SortTurn({ current, remaining, total }: { current: Thought; remaining: number; total: number }) {
+function SortTurn({ current, remaining, total, headingRef }: { current: Thought; remaining: number; total: number; headingRef: RefObject<HTMLHeadingElement | null> }) {
   const categorizeThought = useSessionStore((state) => state.categorizeThought)
   const undoLastDecision = useSessionStore((state) => state.undoLastDecision)
   const history = useFrozenSessionValue((state) => state.history)
@@ -94,8 +98,8 @@ function SortTurn({ current, remaining, total }: { current: Thought; remaining: 
   return (
     <section className="sort-screen" aria-labelledby="sort-title">
       <div className="sort-screen__intro">
-        <h1 id="sort-title">What's in your hands right now?</h1>
-        <p>There are no wrong answers. Just take it one card at a time.</p>
+        <h1 ref={headingRef} id="sort-title" tabIndex={-1}>What's in your hands right now?</h1>
+        <p>There are no wrong answers. You can bring a card back anytime.</p>
       </div>
       <div className="sort-screen__scene">
         <div className="sort-screen__mascot sort-screen__mascot--left" aria-hidden="true"><img src={moocaHugging} alt="" /></div>
@@ -106,11 +110,11 @@ function SortTurn({ current, remaining, total }: { current: Thought; remaining: 
             <motion.div
               key={current.id}
               ref={cardRef}
-              className="sort-deck__card"
+              className={`sort-deck__card ${cardTextSizeClass(current.text)}`}
               role="group"
-              tabIndex={-1}
               aria-label={`Card ${total - remaining + 1} of ${total}`}
               aria-live="polite"
+              aria-atomic="true"
               style={{ x, rotate, color, borderColor: color, boxShadow: shadow }}
               drag={busy ? false : 'x'}
               dragMomentum={false}
@@ -128,10 +132,16 @@ function SortTurn({ current, remaining, total }: { current: Thought; remaining: 
         <div className="sort-screen__undo-slot">
           {canUndo && <button type="button" className="sort-screen__undo" disabled={busy || dragging} onClick={() => { if (!locked.current) undoLastDecision() }}><RotateCcw size={16} aria-hidden="true" />Bring it back</button>}
         </div>
-        <p>Swipe the card or tap the buttons below.</p>
+        <p>Swipe the card or choose the space that feels right today.</p>
         <div className="sort-screen__buttons">
-          <button type="button" className="sort-screen__button sort-screen__button--rest" onClick={() => void choose('rest-it-here')} disabled={busy || dragging}><ArrowLeft size={21} strokeWidth={1.8} aria-hidden="true" />Rest It Here</button>
-          <button type="button" className="sort-screen__button sort-screen__button--hands" onClick={() => void choose('in-my-hands')} disabled={busy || dragging}>In My Hands<ArrowRight size={21} strokeWidth={1.8} aria-hidden="true" /></button>
+          <button type="button" className="sort-screen__button sort-screen__button--rest" onClick={() => void choose('rest-it-here')} disabled={busy || dragging}>
+            <ArrowLeft size={21} strokeWidth={1.8} aria-hidden="true" />
+            Rest It Here
+          </button>
+          <button type="button" className="sort-screen__button sort-screen__button--hands" onClick={() => void choose('in-my-hands')} disabled={busy || dragging}>
+            In My Hands
+            <ArrowRight size={21} strokeWidth={1.8} aria-hidden="true" />
+          </button>
         </div>
       </div>
     </section>

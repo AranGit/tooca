@@ -79,4 +79,26 @@ describe('SortScreen', () => {
     expect(useSessionStore.getState().history).toHaveLength(1)
   })
 
+  it('keeps the drag card out of the tab order', () => {
+    useSessionStore.setState({
+      phase: 'sort',
+      thoughts: [{ id: 'first', text: 'First worry', category: null }],
+      history: [],
+    })
+    render(<SortScreen />)
+
+    expect(screen.getByRole('group', { name: 'Card 1 of 1' })).not.toHaveAttribute('tabindex')
+  })
+
+  it('uses the compact card type for a 120-character concern', () => {
+    useSessionStore.setState({
+      phase: 'sort',
+      thoughts: [{ id: 'first', text: 'a'.repeat(120), category: null }],
+      history: [],
+    })
+    render(<SortScreen />)
+
+    expect(screen.getByRole('group', { name: 'Card 1 of 1' })).toHaveClass('sort-deck__card--compact')
+  })
+
 })

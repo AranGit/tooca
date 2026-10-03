@@ -26,6 +26,36 @@ async function open(width, height, reducedMotion = 'no-preference') {
   assert.equal(await page.locator('vite-error-overlay').count(), 0)
   return page
 }
+async function openSetup(width, height) {
+  const page = await browser.newPage({ viewport: { width, height } })
+  page.setDefaultTimeout(5000)
+  page.on('pageerror', error => errors.push(error.message))
+  await page.addInitScript(() => {
+    sessionStorage.setItem('tooca-session', JSON.stringify({
+      state: { phase: 'setup', thoughts: [], history: [] }, version: 1,
+    }))
+  })
+  await page.goto('http://127.0.0.1:4173/')
+  await page.getByRole('textbox', { name: 'Things on your mind' }).waitFor()
+  await page.evaluate(() => document.fonts.ready)
+  return page
+}
+async function openLongTextMobile() {
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 } })
+  page.setDefaultTimeout(5000)
+  page.on('pageerror', error => errors.push(error.message))
+  const text = 'Preparing for my presentation and worrying about what other people might think. '.repeat(2).slice(0, 120)
+  await page.addInitScript(({ text }) => {
+    sessionStorage.setItem('tooca-session', JSON.stringify({
+      state: { phase: 'sort', thoughts: [{ id: 'long', text, category: null }], history: [] }, version: 1,
+    }))
+  }, { text })
+  await page.goto('http://127.0.0.1:4173/')
+  await page.getByRole('group', { name: 'Card 1 of 1' }).waitFor()
+  await page.evaluate(() => document.fonts.ready)
+  await page.waitForTimeout(250)
+  return page
+}
 async function drag(page, offset) {
   const card = page.locator('.sort-deck__card')
   const rect = await card.boundingBox()
@@ -104,8 +134,22 @@ try {
   await reduced.getByRole('button', { name: 'In My Hands' }).click()
   await reduced.getByRole('group', { name: 'Card 2 of 2' }).waitFor()
   await reduced.close()
+
+  const longTextMobile = await openLongTextMobile()
+  const longCard = await longTextMobile.locator('.sort-deck__card').boundingBox()
+  const longText = await longTextMobile.locator('.sort-deck__card > span').boundingBox()
+  assert.ok(longText.y >= longCard.y && longText.y + longText.height <= longCard.y + longCard.height, 'Long text must stay inside its card on mobile')
+  assert.equal(await longTextMobile.evaluate(() => document.documentElement.scrollWidth > innerWidth), false)
+  await longTextMobile.close()
+
+  const shortLaptop = await openSetup(1280, 720)
+  await shortLaptop.getByRole('button', { name: 'Try with examples' }).click()
+  const continueButton = await shortLaptop.getByRole('button', { name: /Let's sort these 1 thing/ }).boundingBox()
+  assert.ok(continueButton.y + continueButton.height <= 720, 'The setup continue button must be visible on a 1280 × 720 laptop viewport')
+  await shortLaptop.close()
+
   assert.deepEqual(errors, [])
-  console.log('PASS: live drag colors, both swipes, cancelled drag, undo, refresh, double-click guard, completion, responsive layout, reduced motion, no runtime errors')
+  console.log('PASS: live drag colors, both swipes, cancelled drag, undo, refresh, double-click guard, completion, responsive layout, long text containment, short-laptop CTA visibility, reduced motion, no runtime errors')
 } finally {
   await browser.close()
 }

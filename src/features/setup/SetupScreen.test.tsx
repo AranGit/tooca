@@ -26,6 +26,17 @@ describe('SetupScreen', () => {
     expect(screen.getByRole('button', { name: /Let's sort these 1 thing/ })).toBeEnabled()
   })
 
+  it('limits a concern to 120 characters and shows the remaining count', async () => {
+    const user = userEvent.setup()
+    render(<SetupScreen />)
+    const input = screen.getByRole('textbox', { name: 'Things on your mind' })
+
+    await user.type(input, 'a'.repeat(121))
+
+    expect(input).toHaveValue('a'.repeat(120))
+    expect(screen.getByText('120 / 120 characters')).toBeVisible()
+  })
+
   it('keeps user cards, appends unique examples, removes a chosen card, and continues', async () => {
     const user = userEvent.setup()
     render(<SetupScreen />)

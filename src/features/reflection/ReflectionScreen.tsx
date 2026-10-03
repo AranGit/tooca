@@ -4,7 +4,7 @@ import moocaThanks from '@/assets/mascot/mooca-thanks.svg';
 import type { Thought } from '@/store/session';
 import { useFrozenSessionValue, useSessionStore } from '@/store/session';
 import { Check, ChevronDown, Clock3, RotateCcw } from 'lucide-react';
-import { useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import './reflection.css';
 
 type Group = 'hands' | 'rest'
@@ -65,8 +65,13 @@ export function ReflectionScreen() {
   const undoLastDecision = useSessionStore((state) => state.undoLastDecision)
   const resetSession = useSessionStore((state) => state.resetSession)
   const [openGroups, setOpenGroups] = useState<Record<Group, boolean>>({ hands: true, rest: false })
+  const headingRef = useRef<HTMLHeadingElement>(null)
   const hands = thoughts.filter((thought) => thought.category === 'in-my-hands')
   const rest = thoughts.filter((thought) => thought.category === 'rest-it-here')
+
+  useLayoutEffect(() => {
+    headingRef.current?.focus({ preventScroll: true })
+  }, [])
 
   function toggle(group: Group) {
     setOpenGroups((current) => ({ ...current, [group]: !current[group] }))
@@ -92,7 +97,7 @@ export function ReflectionScreen() {
     <section className="reflection-screen" aria-labelledby="reflection-title">
       <div className="reflection-screen__intro">
         <div className="reflection-screen__copy">
-          <h1 id="reflection-title">All sorted, for now.</h1>
+          <h1 ref={headingRef} id="reflection-title" tabIndex={-1}>All sorted, for now.</h1>
           <p>{summaryState.reflectionDescription[0]}<br className="reflection-screen__mobile-break" /> {summaryState.reflectionDescription[1]}</p>
         </div>
         <img className="reflection-screen__mascot" src={summaryState.moocaState} alt="Mooca smiling with the sun" />
@@ -108,7 +113,7 @@ export function ReflectionScreen() {
           <RotateCcw size={16} strokeWidth={1.8} aria-hidden="true" />
           Bring it back
         </button>
-        <button type="button" className="reflection-screen__begin-again" onClick={resetSession}>Begin again</button>
+        <button type="button" className="reflection-screen__begin-again" onClick={resetSession}>Clear & Begin again</button>
       </div>
     </section>
   )
