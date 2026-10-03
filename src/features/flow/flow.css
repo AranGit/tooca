@@ -99,10 +99,22 @@ button.step-indicator__step {
   min-height: max(600px, min(790px, calc(100svh - 234px)));
 }
 
+.flow-main--setup {
+  display: grid;
+  align-items: center;
+  min-height: calc(100svh - 64px);
+  margin-block: 0;
+  padding-block: 48px;
+}
+
+.flow-main--setup > .flow-stage {
+  min-height: 0;
+}
+
 .setup-screen {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: max(600px, min(790px, calc(100svh - 234px)));
+  height: clamp(680px, calc(100svh - 234px), 790px);
 }
 
 .setup-intro {
@@ -110,6 +122,7 @@ button.step-indicator__step {
   min-width: 0;
   border-right: 1px solid var(--color-primary-200);
   padding-top: 118px;
+  padding-right: 24px;
 }
 
 .setup-intro__copy {
@@ -135,8 +148,9 @@ button.step-indicator__step {
 
 .setup-intro__mascot {
   display: block;
-  width: 430px;
-  height: 430px;
+  width: min(430px, 100%);
+  height: auto;
+  aspect-ratio: 1;
   object-fit: contain;
   margin: 6px 0 0 4px;
 }
@@ -147,20 +161,27 @@ button.step-indicator__step {
   flex-direction: column;
   min-width: 0;
   min-height: 0;
-  padding: 157px 0 2px 107px;
+  padding: 14px 0 2px clamp(32px, calc(20vw - 181px), 107px);
 }
 
 .setup-workspace__mascot {
-  position: absolute;
-  top: 14px;
-  right: 0;
   display: block;
-  width: 210px;
-  height: 172px;
+  width: clamp(164px, calc(16vw - 20px), 210px);
+  height: auto;
+  aspect-ratio: 210 / 172;
+  margin-bottom: -6px;
   object-fit: contain;
 }
 
+.thought-form__heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 16px;
+}
+
 .thought-form {
+  flex: none;
   display: flex;
   flex-direction: column;
   gap: 9px;
@@ -249,6 +270,7 @@ button.step-indicator__step {
 .thought-list-wrap {
   min-height: 0;
   max-height: 316px;
+  margin-bottom: 20px;
   overflow-y: auto;
   scrollbar-color: var(--color-gray-600) transparent;
   scrollbar-width: thin;
@@ -310,6 +332,7 @@ button.step-indicator__step {
   gap: 14px;
   width: 100%;
   min-height: 56px;
+  flex: none;
   margin-top: auto;
   border: 0;
   border-radius: var(--radius-circle);
@@ -329,19 +352,6 @@ button.step-indicator__step {
 .setup-next:disabled {
   background: var(--color-accent-blue-100);
   cursor: not-allowed;
-}
-
-@media (min-width: 921px) and (max-width: 1100px) {
-  .setup-workspace {
-    padding-top: 190px;
-    padding-left: clamp(32px, 8vw, 107px);
-  }
-
-  .setup-workspace__mascot {
-    top: 18px;
-    width: 180px;
-    height: 148px;
-  }
 }
 
 @media (max-width: 920px) {
@@ -382,10 +392,16 @@ button.step-indicator__step {
     min-height: calc(100svh - 64px);
   }
 
+  .flow-main--setup {
+    display: block;
+    padding-block: 0;
+  }
+
   .setup-screen {
     display: flex;
     flex-direction: column;
-    height: calc(100svh - 64px);
+    min-height: max(600px, calc(100svh - 64px));
+    height: max(600px, calc(100svh - 64px));
   }
 
   .setup-intro {
@@ -401,6 +417,11 @@ button.step-indicator__step {
     letter-spacing: -0.4px;
   }
 
+  .setup-intro__copy {
+    width: 100%;
+    margin-inline: auto;
+  }
+
   .desktop-break,
   .setup-intro__mascot {
     display: none;
@@ -414,16 +435,11 @@ button.step-indicator__step {
   .setup-workspace {
     flex: 1;
     min-height: 0;
-    padding: 151px 0 24px;
+    padding: 26px 0 24px;
   }
 
   .setup-workspace__mascot {
-    top: 26px;
-    right: 0;
-    left: auto;
-    width: 190px;
-    height: 156px;
-    margin: 0;
+    width: clamp(132px, calc(50vw - 47px), 190px);
   }
 
   .thought-form label {
@@ -445,6 +461,7 @@ button.step-indicator__step {
   .thought-list-wrap {
     max-height: none;
     flex: 1;
+    margin-bottom: 0;
   }
 
   .thought-card {
@@ -457,12 +474,6 @@ button.step-indicator__step {
     margin-top: 20px;
   }
 
-}
-
-@media (min-width: 701px) and (max-width: 920px) {
-  .setup-workspace {
-    padding-bottom: 84px;
-  }
 }
 
 @media (max-width: 370px) {

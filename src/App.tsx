@@ -49,7 +49,7 @@ function App() {
           <StepIndicator phase={phase} />
         </div>
       </header>
-      <main id="main" className={`flow-main ${phase === 'sort' ? 'flow-main--sort' : phase === 'reflection' ? 'flow-main--reflection' : ''}`}>
+      <main id="main" className={`flow-main flow-main--${phase}`}>
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={phase}

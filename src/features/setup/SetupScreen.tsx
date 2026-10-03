@@ -55,15 +55,17 @@ export function SetupScreen() {
       </div>
 
       <div className="setup-workspace">
-        <img
-          className="setup-workspace__mascot"
-          src={moocaUsingPhone}
-          width="210"
-          height="172"
-          alt="Mooca holding a phone while thoughts float nearby"
-        />
         <form className="thought-form" onSubmit={handleSubmit}>
-          <label htmlFor="thought-input">Things on your mind</label>
+          <div className="thought-form__heading">
+            <label htmlFor="thought-input">Things on your mind</label>
+            <img
+              className="setup-workspace__mascot"
+              src={moocaUsingPhone}
+              width="210"
+              height="172"
+              alt="Mooca holding a phone while thoughts float nearby"
+            />
+          </div>
           <input
             id="thought-input"
             ref={inputRef}
