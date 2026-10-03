@@ -49,11 +49,11 @@ function App() {
           <StepIndicator phase={phase} />
         </div>
       </header>
-      <main id="main" className={`flow-main flow-main--${phase}`}>
+      <main id="main" className="flow-main">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={phase}
-            className="flow-stage"
+            className={`flow-stage flow-stage--${phase}`}
             initial={reduceMotion ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={reduceMotion ? undefined : { opacity: 0, y: -8 }}

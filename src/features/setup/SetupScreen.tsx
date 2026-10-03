@@ -4,7 +4,7 @@ import { useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import moocaWelcome from '@/assets/mascot/mooca-welcome.png'
 import moocaUsingPhone from '@/assets/mascot/mooca-using-phone.svg'
-import { useSessionStore } from '@/store/session'
+import { useFrozenSessionValue, useSessionStore } from '@/store/session'
 import { pickExamples, WORRY_EXAMPLES } from './examples'
 
 function cardCountLabel(count: number) {
@@ -15,7 +15,7 @@ export function SetupScreen() {
   const [draft, setDraft] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
   const reduceMotion = useReducedMotion()
-  const thoughts = useSessionStore((state) => state.thoughts)
+  const thoughts = useFrozenSessionValue((state) => state.thoughts)
   const addThought = useSessionStore((state) => state.addThought)
   const addThoughts = useSessionStore((state) => state.addThoughts)
   const removeThought = useSessionStore((state) => state.removeThought)
@@ -97,11 +97,11 @@ export function SetupScreen() {
         <div className="thought-list-wrap">
           <ul className="thought-list" aria-label="Things on your mind">
             <AnimatePresence initial={false}>
-              {thoughts.map((thought) => (
+              {thoughts.toReversed().map((thought) => (
                 <motion.li
                   key={thought.id}
                   layout={!reduceMotion}
-                  initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+                  initial={reduceMotion ? false : { opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={reduceMotion ? undefined : { opacity: 0, x: 24 }}
                   transition={{ duration: 0.18 }}

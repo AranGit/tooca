@@ -2,7 +2,7 @@ import moocaHappy from '@/assets/mascot/mooca-happy.svg';
 import moocaHugging from '@/assets/mascot/mooca-hugging.svg';
 import moocaThanks from '@/assets/mascot/mooca-thanks.svg';
 import type { Thought } from '@/store/session';
-import { useSessionStore } from '@/store/session';
+import { useFrozenSessionValue, useSessionStore } from '@/store/session';
 import { Check, ChevronDown, Clock3, RotateCcw } from 'lucide-react';
 import { useState } from 'react';
 import './reflection.css';
@@ -60,8 +60,8 @@ function SummaryGroup({ group, title, thoughts, open, onToggle }: SummaryGroupPr
 }
 
 export function ReflectionScreen() {
-  const thoughts = useSessionStore((state) => state.thoughts)
-  const history = useSessionStore((state) => state.history)
+  const thoughts = useFrozenSessionValue((state) => state.thoughts)
+  const history = useFrozenSessionValue((state) => state.history)
   const undoLastDecision = useSessionStore((state) => state.undoLastDecision)
   const resetSession = useSessionStore((state) => state.resetSession)
   const [openGroups, setOpenGroups] = useState<Record<Group, boolean>>({ hands: true, rest: false })

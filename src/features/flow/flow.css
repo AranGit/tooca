@@ -90,25 +90,22 @@ button.step-indicator__step {
 }
 
 .flow-main {
-  width: min(1128px, calc(100% - 48px));
-  margin: 86px auto 0;
-  padding-bottom: 84px;
+  min-height: calc(100svh - 64px);
 }
 
 .flow-stage {
+  width: min(1128px, calc(100% - 48px));
+  margin: 86px auto 0;
+  padding-bottom: 84px;
   min-height: max(600px, min(790px, calc(100svh - 234px)));
 }
 
-.flow-main--setup {
+.flow-stage--setup {
   display: grid;
   align-items: center;
   min-height: calc(100svh - 64px);
   margin-block: 0;
   padding-block: 48px;
-}
-
-.flow-main--setup > .flow-stage {
-  min-height: 0;
 }
 
 .setup-screen {
@@ -381,7 +378,7 @@ button.step-indicator__step {
     width: 22px;
   }
 
-  .flow-main {
+  .flow-stage {
     width: min(560px, calc(100% - 32px));
     margin: 0 auto;
     padding-bottom: 0;
@@ -392,7 +389,7 @@ button.step-indicator__step {
     min-height: calc(100svh - 64px);
   }
 
-  .flow-main--setup {
+  .flow-stage--setup {
     display: block;
     padding-block: 0;
   }

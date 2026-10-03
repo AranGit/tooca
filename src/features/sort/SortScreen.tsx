@@ -6,7 +6,7 @@ import { colorAccentBlue500, colorPrimary500, colorSystemError500 } from '@/styl
 import moocaHappy from '@/assets/mascot/mooca-happy.svg'
 import moocaHugging from '@/assets/mascot/mooca-hugging.svg'
 import moocaUsingPhone from '@/assets/mascot/mooca-using-phone.svg'
-import { useSessionStore } from '@/store/session'
+import { useFrozenSessionValue, useSessionStore } from '@/store/session'
 import type { Category, Thought } from '@/store/session'
 import './sort.css'
 
@@ -17,7 +17,7 @@ const dragColors = [
 ]
 
 export function SortScreen() {
-  const thoughts = useSessionStore((state) => state.thoughts)
+  const thoughts = useFrozenSessionValue((state) => state.thoughts)
   const pending = thoughts.filter((thought) => thought.category === null)
   const current = pending[0]
   const previousId = useRef(current?.id)
@@ -34,7 +34,8 @@ export function SortScreen() {
 function SortTurn({ current, remaining, total }: { current: Thought; remaining: number; total: number }) {
   const categorizeThought = useSessionStore((state) => state.categorizeThought)
   const undoLastDecision = useSessionStore((state) => state.undoLastDecision)
-  const canUndo = useSessionStore((state) => state.history.length > 0)
+  const history = useFrozenSessionValue((state) => state.history)
+  const canUndo = history.length > 0
   const reduceMotion = useReducedMotion()
   const [busy, setBusy] = useState(false)
   const [dragging, setDragging] = useState(false)

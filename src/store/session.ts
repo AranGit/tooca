@@ -1,5 +1,7 @@
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
+import { useIsPresent } from 'motion/react'
+import { useLayoutEffect, useState } from 'react'
 
 export type Phase = 'setup' | 'sort' | 'reflection'
 export type Category = 'in-my-hands' | 'rest-it-here'
@@ -16,7 +18,7 @@ export interface SortDecision {
   nextCategory: Category
 }
 
-interface SessionState {
+export interface SessionState {
   phase: Phase
   thoughts: Thought[]
   history: SortDecision[]
@@ -162,3 +164,16 @@ export const useSessionStore = create<SessionState>()(
     },
   ),
 )
+
+export function useFrozenSessionValue<T>(selector: (state: SessionState) => T): T {
+  const value = useSessionStore(selector)
+  const isPresent = useIsPresent()
+  const [frozenValue, setFrozenValue] = useState(value)
+
+  useLayoutEffect(() => {
+    // oxlint-disable-next-line -- retain the last committed session value while this screen exits.
+    if (isPresent) setFrozenValue(value)
+  }, [isPresent, value])
+
+  return isPresent ? value : frozenValue
+}
