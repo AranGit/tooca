@@ -101,7 +101,7 @@ Browser checks and Storybook accessibility tests require Chromium. See [complete
 | :--- | :--- | :--- |
 | React 19 · TypeScript · Tailwind CSS 4 | Motion · Zustand · sessionStorage | Vite · Vitest · Testing Library · Storybook · Playwright · Oxlint |
 
-**Session behavior:** cards, categories, and sorting history survive refreshes in the same tab. Unsubmitted text and accordion expansion are temporary. The app has no backend or cross-device synchronization; **Begin again** clears the current session.
+**Session behavior:** cards, categories, and sorting history survive refreshes in the same tab. The Add cards list shows the newest card first, while sorting and reflection retain the original entry order. Unsubmitted text and accordion expansion are temporary. The app has no backend or cross-device synchronization; **Begin again** clears the current session.
 
 **Known accessibility issue:** the supplied sorting colors have recorded contrast failures. Automated accessibility checks remain enabled. See the [QA findings](design-qa.md#open-accessibility-finding) before treating this as accessibility-complete.
 

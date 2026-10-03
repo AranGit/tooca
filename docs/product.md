@@ -42,6 +42,7 @@ The interaction is intended to interrupt passive rumination by giving the user a
 | Phase | Action | Result |
 | :--- | :--- | :--- |
 | Add cards | Type, then press Enter or **Add another** | Trims and adds a nonempty concern; clears and refocuses the input |
+| Add cards | Add a concern or **Try with examples** | Places the new card at the top of the Add cards list and moves existing cards down |
 | Add cards | **Try with examples** | Adds one random mock concern, excluding existing text matches regardless of case |
 | Add cards | Remove a card | Deletes that card and any associated decision history |
 | Add cards | Continue | Requires at least one card; opens sorting, or reflection if all cards already have categories |
@@ -55,7 +56,7 @@ The interaction is intended to interrupt passive rumination by giving the user a
 | Reflection | **Begin again** | Clears all cards and history; returns to Add cards |
 | Any phase | **Add cards** in the header | Returns to setup while retaining existing cards and categories |
 
-The input accepts up to 240 characters. Whitespace-only input cannot be submitted. Manually entered duplicate concerns are allowed. There are 30 mock examples; the example button disables when all are already present.
+The input accepts up to 240 characters. Whitespace-only input cannot be submitted. Manually entered duplicate concerns are allowed. There are 30 mock examples; the example button disables when all are already present. The Add cards list is newest-first so the concern that was just added is immediately visible. This presentation order only applies to Step 1; sorting and reflection use original entry order.
 
 ## Reflection states
 

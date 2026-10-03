@@ -15,7 +15,7 @@ flowchart LR
     Store <--> Storage["sessionStorage"]
 ```
 
-[App.tsx](../src/App.tsx) renders one screen according to `phase`. Motion animates transitions between screens and respects reduced-motion preferences.
+[App.tsx](../src/App.tsx) renders one screen according to `phase`. Each phase owns its animated layout wrapper, so an exiting screen keeps its dimensions until its exit animation finishes. Motion respects reduced-motion preferences.
 
 ## State and navigation
 
@@ -48,8 +48,9 @@ The progress indicator has two labels: Add cards and Sort cards. Both are comple
 | Card drag position, animation lock, dragging state | SortTurn local state and Motion values | No |
 | Expanded summary groups | ReflectionScreen local state | No |
 | Pending cards and category groups | Derived from stored cards | Recomputed |
+| Exiting screen snapshot | Motion presence context | No; kept only until the exit animation completes |
 
-Zustand lets the screens and shared header act on the same session without passing actions through every component. Temporary interaction state stays close to the component that uses it.
+Zustand lets the screens and shared header act on the same session without passing actions through every component. Temporary interaction state stays close to the component that uses it. While a screen exits, it freezes the last committed cards and decision history. This prevents the outgoing UI from changing its card count, summary copy, mascot, or layout before the incoming step appears.
 
 ## Data model
 
@@ -71,6 +72,8 @@ interface SortDecision {
 ```
 
 Cards receive UUIDs. A null category means unsorted. Sorting appends a decision to history; undo removes the latest decision and restores that card's previous category. The displayed pending card is the first uncategorized card in original entry order.
+
+The stored array remains in original entry order. Step 1 creates a reversed view for its Add cards list, placing the newest card first; Steps 2 and 3 continue to use the stored order.
 
 ## Persistence and safeguards
 
