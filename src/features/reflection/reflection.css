@@ -101,16 +101,12 @@
   width: 24px;
   height: 24px;
   flex: none;
-  border-radius: var(--radius-circle);
-  color: var(--color-gray-0);
 }
 
-.reflection-group--hands .reflection-group__icon {
-  background: var(--color-primary-500);
-}
-
-.reflection-group--rest .reflection-group__icon {
-  background: var(--color-system-error-500);
+.reflection-group__icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .reflection-group__title {

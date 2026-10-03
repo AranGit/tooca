@@ -1,9 +1,11 @@
 import moocaHappy from '@/assets/mascot/mooca-happy.svg';
 import moocaHugging from '@/assets/mascot/mooca-hugging.svg';
 import moocaThanks from '@/assets/mascot/mooca-thanks.svg';
+import reflectionCheck from '@/assets/icons/reflection-check.svg';
+import reflectionClock from '@/assets/icons/reflection-clock.svg';
 import type { Thought } from '@/store/session';
 import { useFrozenSessionValue, useSessionStore } from '@/store/session';
-import { Check, ChevronDown, Clock3, RotateCcw } from 'lucide-react';
+import { ChevronDown, RotateCcw } from 'lucide-react';
 import { useLayoutEffect, useRef, useState } from 'react';
 import './reflection.css';
 
@@ -34,7 +36,7 @@ function SummaryGroup({ group, title, thoughts, open, onToggle }: SummaryGroupPr
         onClick={onToggle}
       >
         <span className="reflection-group__icon" aria-hidden="true">
-          {group === 'hands' ? <Check size={17} strokeWidth={2.2} /> : <Clock3 size={17} strokeWidth={2.2} />}
+          <img src={group === 'hands' ? reflectionCheck : reflectionClock} alt="" />
         </span>
         <span className="reflection-group__title">{title}</span>
         <span className="reflection-group__count">{countLabel}</span>

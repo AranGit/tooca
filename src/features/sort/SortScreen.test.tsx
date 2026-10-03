@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { useSessionStore } from '@/store/session'
 import { SortScreen } from './SortScreen'
+import { getMobileMascotState } from './mobileMascot'
 
 beforeEach(() => {
   useSessionStore.getState().resetSession()
@@ -28,11 +29,12 @@ describe('SortScreen', () => {
     await waitFor(() => {
       expect(screen.getByRole('group', { name: 'Card 2 of 2' })).toHaveTextContent("What if they don't like me?")
     })
+    await waitFor(() => expect(screen.getByRole('button', { name: 'In My Hands' })).toBeEnabled(), { timeout: 2_000 })
     await user.click(screen.getByRole('button', { name: 'In My Hands' }))
 
     await waitFor(() => {
       expect(useSessionStore.getState().phase).toBe('reflection')
-    })
+    }, { timeout: 2_000 })
     expect(useSessionStore.getState().thoughts.map((thought) => thought.category)).toEqual([
       'rest-it-here', 'in-my-hands',
     ])
@@ -99,6 +101,43 @@ describe('SortScreen', () => {
     render(<SortScreen />)
 
     expect(screen.getByRole('group', { name: 'Card 1 of 1' })).toHaveClass('sort-deck__card--compact')
+  })
+
+  it.each([
+    ['In My Hands', 'mooca-happy'],
+    ['Rest It Here', 'mooca-hugging'],
+  ])('changes the mobile mascot when %s is chosen', async (buttonName, mascotAsset) => {
+    useSessionStore.setState({
+      phase: 'sort',
+      thoughts: [
+        { id: 'first', text: 'First worry', category: null },
+        { id: 'second', text: 'Second worry', category: null },
+      ],
+      history: [],
+    })
+    const user = userEvent.setup()
+    const { container } = render(<SortScreen />)
+    const mascot = container.querySelector<HTMLImageElement>('.sort-screen__mobile-mascot img')
+
+    expect(mascot).toHaveAttribute('src', expect.stringContaining('mooca-using-phone'))
+    await user.click(screen.getByRole('button', { name: buttonName }))
+    expect(container.querySelector(`.sort-screen__mobile-mascot img[src*="${mascotAsset}"]`)).toBeInTheDocument()
+
+    await waitFor(() => expect(screen.getByRole('group', { name: 'Card 2 of 2' })).toBeVisible())
+    expect(container.querySelector(`.sort-screen__mobile-mascot img[src*="${mascotAsset}"]`)).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: buttonName })).toBeDisabled()
+    expect(screen.getByText('Second worry')).toHaveClass('sort-deck__card-text--waiting')
+    await waitFor(() => expect(screen.getByRole('button', { name: buttonName })).toBeEnabled(), { timeout: 2_000 })
+    expect(container.querySelector('.sort-screen__mobile-mascot img[src*="mooca-using-phone"]')).toBeInTheDocument()
+    expect(screen.getByText('Second worry')).not.toHaveClass('sort-deck__card-text--waiting')
+  })
+
+  it('selects the mobile mascot from drag direction with a neutral dead zone', () => {
+    expect(getMobileMascotState(-13)).toBe('rest')
+    expect(getMobileMascotState(-12)).toBe('neutral')
+    expect(getMobileMascotState(0)).toBe('neutral')
+    expect(getMobileMascotState(12)).toBe('neutral')
+    expect(getMobileMascotState(13)).toBe('hands')
   })
 
 })
