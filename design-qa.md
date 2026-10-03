@@ -1,115 +1,67 @@
-# Tooca design QA
+# Design QA
 
-## Step 1
+[← README](README.md) · [Product](docs/product.md) · [Development & verification](docs/development.md)
 
-**Findings**
+This report records earlier visual and interaction reviews. Screenshots are historical evidence, not a live rendering of the latest code. Updating this document did not rerun the application checks.
 
-- No actionable P0/P1/P2 visual or interaction differences remain. The two-card desktop/mobile views and ten-card desktop view retain the mockups' composition, visual hierarchy, illustrations, form controls, card density, scrolling, and fixed continuation button.
+## Review overview
 
-**Evidence**
+| Area | Recorded result | Remaining concern |
+| :--- | :--- | :--- |
+| Add cards | Reference comparisons and responsive spacing fixes completed | Captures predate later header and text updates |
+| Sort cards | Full neutral, drag, next-card, undo, and responsive states reviewed | Supplied colors have insufficient contrast |
+| Reflection | Groups, undo, reset, responsive layout, and persistence reviewed | Captures predate some background and mascot-state updates |
+| Design tokens | Shared color/radius generation and raw-value audit added | Layout and typography values have separate ownership |
 
-- Source visual truth: `../1 SETUP/1.1 Desktop.png` (1440 × 1024), `../1 SETUP/1.1 Mobile.png` (402 × 874), and `../1 SETUP/1.2 Desktip.png` (1440 × 1024).
-- Rendered implementation: `qa/step1-desktop-1440.png` (1440 × 1024), `qa/step1-mobile-402x812.png` (402 × 812), and `qa/step1-desktop-10-cards.png` (1440 × 1024), captured from `http://127.0.0.1:4173/`.
-- Side-by-side full-view comparison: `qa/comparison-full.png`. The desktop captures are displayed at 50% in both columns. The mobile source's 62-pixel device status bar is cropped, leaving the same 402 × 812 app area as the browser capture at 1:1. Source and implementation use the same two-card state for the primary comparison. The ten-card source and implementation use different concern texts because examples are deliberately randomized, but match in count and layout.
-- Responsive follow-up captures: `qa/step1-compact-desktop-fixed.png` (1000 × 930) and `qa/step1-tablet-fixed.png` (780 × 930), checked against the reference's desktop bottom margin and the user-supplied narrow-window screenshot. The compact desktop button now has 86 px below it, and the tablet button has 84 px; the top-right mascot no longer covers the label.
-- Focused inspection: the mobile comparison is shown at 1:1 within the combined image; headline wrapping, mascot crop, input/button dimensions, card spacing, and CTA position are legible there. The desktop ten-card region visibly preserves the list viewport and scroll treatment.
+## Visual evidence
 
-**Fidelity review**
+| Experience | Desktop | Mobile / responsive | Comparison |
+| :--- | :--- | :--- | :--- |
+| Add cards | [Two cards](qa/step1-desktop-1440.png) · [Ten cards](qa/step1-desktop-10-cards.png) | [Mobile](qa/step1-mobile-402x812.png) · [Tablet fix](qa/step1-tablet-fixed.png) · [Compact desktop fix](qa/step1-compact-desktop-fixed.png) | [Reference comparison](qa/comparison-full.png) |
+| Sort cards | [Neutral](qa/step2-full/01-idle.png) · [Right drag](qa/step2-full/02-drag-right.png) · [Left drag](qa/step2-full/03-drag-left.png) · [Next card](qa/step2-full/04-next-card.png) | [402 px](qa/step2-full/next-402x812.png) · [320 px](qa/step2-full/next-320x667.png) · [780 px](qa/step2-full/next-780x900.png) | [Full interaction comparison](qa/step2-full/comparison.png) |
+| Reflection | [Desktop](qa/step3/desktop-1440x1024.png) | [Mobile](qa/step3/mobile-402x812.png) · [Tablet](qa/step3/tablet-780x900.png) | [Reference comparison](qa/step3/comparison.png) |
 
-- Fonts and typography: bundled Gotham Rounded weights render with comparable hierarchy, wrapping, and optical size. The headline wraps on the same lines in both viewports.
-- Spacing and layout: desktop columns, divider, artwork, form, list, and CTA align closely. Mobile hierarchy, mascot placement, form width, and bottom CTA align closely; card content scrolls without covering the CTA.
-- Colors and tokens: the supplied color and radius tokens drive controls. The background gradient and button hues are close to the references and maintain readable contrast.
-- Image quality and assets: the supplied Tooca logo and Mooca artwork are used directly and remain sharp at the displayed sizes; there are no substitute illustrations.
-- Copy and content: labels, help text, actions, and card-count copy match the references. Extra examples are intentionally random mock concerns.
+The original design references were supplied outside this repository in the assignment's Setup, Categorize, and Reflection folders. The tracked comparison images above let GitHub readers inspect the recorded comparisons without those local folders. Desktop references use 1440 × 1024; mobile comparisons crop the reference's 62 px device status bar to compare a 402 × 812 app area.
 
-**Open Questions**
+## Review history
 
-- None for Step 1. Sorting and reflection screens are separate follow-up work; the current Sort view is a functional handoff that keeps the collected cards.
+### Add cards
 
-**Implementation Checklist**
+The initial review compared typography, artwork, form controls, list density, scrolling, and continuation-button placement. A subsequent narrow-window review found overlapping mascot/label content and insufficient bottom spacing around 780 px wide.
 
-- [x] Add and remove concerns, including long text.
-- [x] Randomly add one example concern per click without repeating existing examples.
-- [x] Preserve cards and phase across refresh in the same tab.
-- [x] Keep the primary action visible when ten or more cards are present.
-- [x] Verify desktop, mobile, tests, Storybook, lint, typecheck, and production build.
+The fix introduced a tablet layout through 920 px, reserved mascot space between 921 and 1100 px, and restored compact-desktop bottom spacing. The recorded follow-up captures show 86 px below the button at 1000 × 930 and 84 px at 780 × 930. These are historical measurements, not universal layout guarantees.
 
-**Follow-up Polish**
+### Sort cards
 
-- [P3] The rendered background reads very slightly lighter than the source in the middle of the page; this does not affect hierarchy or readability.
+The first pass corrected mobile card text wrapping and desktop mascot geometry. The full-reference follow-up reviewed the blue neutral card and underlay, coral/teal directional colors, approximately ±12° rotation, overlap over the mascots, final-card sizing, and reserved undo space.
 
-**Comparison history**
+Recorded browser checks covered both directions, cancelled drag, next card, undo, refresh, repeated clicks, completion, reduced motion, and overflow at 1440, 780, 402, and 320 px widths. Earlier captures are also available in [the initial comparison](qa/step2/comparison.png).
 
-- Initial 1440 px desktop and 402 px mobile side-by-side pass: no P0/P1/P2 findings at those viewports.
-- Follow-up narrow-window review: the user identified a P2 regression at intermediate widths. At roughly 780 px, the two-column desktop layout compressed the form and mascot into the same area, while a viewport-height calculation left no bottom margin below the CTA. The fix introduces a tablet layout through 920 px, reserves vertical mascot space from 921–1100 px, and subtracts the intended bottom margin from compact desktop stage height. The two new screenshots above show the corrected positions; the 1440 × 1024 and 402 × 812 reference sizes remain intact.
+### Reflection
 
-## Step 2
+The recorded review covered accordion layout, category counts, original card order, empty groups, undo, reset, and refresh. Desktop, tablet, and mobile captures were compared; a 320 × 667 viewport with 20 cards was also checked for overflow and action overlap.
 
-**Findings**
+The current implementation uses `gray/100` for the page background and changes its description and mascot according to the category split: thanks for a mixed result, happy for all In My Hands, and hugging for all Rest It Here. Older screenshots should not be used as proof of those later changes.
 
-- No actionable P0/P1/P2 differences remain in the sorting screen. The card, character art, title, actions, and bottom spacing follow the desktop and mobile references.
+### Shared foundations
 
-**Evidence**
+Application colors and recurring corner radii were migrated to design tokens. Radius tokens include 4 px (`xs`) and 12 px (`md`). Motion reads generated TypeScript colors from the same source as CSS. The header uses a translucent white gradient, and the progress connector uses primary/500 after the first step is complete.
 
-- Source visual truth: `../Step 2 - 3/2.1 CATEGORIZE/Desktop.png` (1440 × 1024) and `../Step 2 - 3/2.1 CATEGORIZE Begin/Mobile.png` (402 × 874).
-- Rendered implementation: `qa/step2/desktop-1440x1024.png` (1440 × 1024) and `qa/step2/mobile-402x812.png` (402 × 812), captured from `http://127.0.0.1:4173/` with two pending cards and “Job interview tomorrow.” in front.
-- Side-by-side full-view comparison: `qa/step2/comparison.png`. Desktop images are displayed at 50% in both columns. The mobile source's 62-pixel status bar is cropped; the remaining 402 × 812 app area is compared with the browser capture at 1:1. The screenshot itself allows focused inspection of mobile typography, mascot, card border, underlay, and controls.
-- Responsive checks: 1101, 1100, 1000, 920, 780, and 402 px widths, plus a 402 × 667 short viewport. The card stays clear of the actions; the short viewport can scroll to them.
-- Interaction checks in the browser: left and right buttons, a right swipe, a short drag that returns the card, automatic advance to the next card, refresh during sorting, return to Step 1, adding another card, and completion into reflection.
+The token-migration record reports passing typecheck, lint, unit tests, production build, and browser sorting verification. The later apostrophe update also passed typecheck, lint, and all 14 unit tests. These results describe those earlier revisions.
 
-**Fidelity review**
+## Open accessibility finding
 
-- Typography: bundled Gotham Rounded reproduces the headline and card hierarchy; the example card fits on one line in both target viewports.
-- Spacing and layout: the desktop card is 500 × 242 at x=462/y=411 versus roughly x=460/y=410 in the source. The mobile card is 330 × 172 at x=36/y=436 versus roughly x=36/y=438 in the cropped source. The controls retain clear bottom space.
-- Colors and tokens: the blue card and gradient follow the supplied palette. The action fills now use the supplied primary and error tokens; their contrast finding is recorded under the full interaction references below.
-- Image quality: the supplied mascot SVGs are used directly; desktop art sits in the source's colored oval regions and the mobile phone mascot sits above the card.
-- Copy and content: heading, guidance, category labels, and example card copy match the source.
+The recorded Step 2 review found insufficient contrast in the supplied primary/500 and error/500 palette combinations:
 
-**Comparison history**
+| Content | Combination | Recorded ratio | Required ratio in the review |
+| :--- | :--- | :--- | :--- |
+| Button label | White on coral | 2.77:1 | 4.5:1 |
+| Button label | White on teal | 2.19:1 | 4.5:1 |
+| Large card text while dragging | Coral on white | 2.77:1 | 3:1 |
+| Large card text while dragging | Teal on white | 2.19:1 | 3:1 |
 
-- The first combined comparison found the mobile example text wrapping to two lines and the desktop character circles slightly high and oversized. The mobile card font/underlay and desktop art geometry were adjusted, then both implementation screenshots were recaptured and compared side by side again. No P0/P1/P2 differences remain.
+Six sorting Storybook cases previously reported contrast failures. Accessibility checks remain enabled. Resolving this requires a color or text-color revision followed by a new contrast and visual review; reference fidelity alone does not establish accessibility conformance.
 
-**Follow-up polish**
+## Reproduce and refresh evidence
 
-- [P3] Mascot rendering and the background gradient differ subtly from the flattened source screenshots. The original SVG artwork is retained.
-
-## Step 3
-
-**Findings**
-
-- No P0/P1/P2 layout or interaction differences remain in the reflection screen. The desktop content width, accordion positions, mobile vertical rhythm, and bottom actions follow the references.
-
-**Evidence**
-
-- Source visual truth: `../Step 2 - 3/3.1 REFLECTION/Desktop.png` (1440 × 1024) and `../Step 2 - 3/3 FINISHED SORTING/Balance.png` (402 × 874).
-- Rendered implementation: `qa/step3/desktop-1440x1024.png`, `qa/step3/mobile-402x812.png`, and `qa/step3/tablet-780x900.png`.
-- Side-by-side full-view comparison: `qa/step3/comparison.png`. Desktop captures are shown at 50%; the mobile source's 62-pixel device status bar is cropped so both app areas measure 402 × 812. All four primary captures show the same one-card/two-card category split and the same first concern.
-- Browser checks: opening the second accordion, refreshing during reflection, returning the latest decision to sorting, categorizing it again, and resetting the session. A 320 × 667 viewport with 20 cards was checked for horizontal overflow and action overlap. No runtime errors appeared in the desktop, mobile, or tablet captures.
-
-**Fidelity review**
-
-- Typography and copy: bundled Gotham Rounded, title, description, category counts, card text, and action labels match the references.
-- Layout: desktop accordions begin at x=348/y=330 with 744 px width; mobile accordions begin at x=16/y=349 with 370 px width. The actions stay near the viewport bottom with clear margin, and long content scrolls without overlapping them.
-- Colors and assets: the reflection background uses `gray/100` as subsequently requested; the mint/coral sections use the supplied tokens. The supplied Mooca happy SVG is used for the illustration.
-- States: both categories can expand independently, empty categories have a message, and card order follows the original entry order. The two actions preserve or clear session state as intended.
-
-**Follow-up polish**
-
-- [P3] The supplied happy SVG uses a different sun and character pose from the flattened reflection mockup; its placement and scale are aligned while retaining the original reusable artwork.
-
-## Step 2 — full interaction references
-
-- Source: the four 1440 × 1024 images in `2.1 CATEGORIZE`, `2.2 CATEGORIZE`, `2.3 CATEGORIZE`, and `2.4 CATEGORIZE` under the supplied `OOCA UX_UI Assignment - Aran (1)` download folder.
-- Evidence: `qa/step2-full/comparison.png` places each reference beside its matching browser screenshot at equal 50% scale. Separate full-resolution captures preserve all four states. Additional captures cover 402 × 812, 320 × 667, and 780 × 900.
-- Layout: the neutral card, fixed blue underlay, directional overlap over the mascots, approximately ±12° rotation, final-card size, and undo action follow the full reference set. The heading, category copy, bundled font, and original mascot assets are retained. Long text wraps naturally; the last example uses two balanced lines rather than a hard-coded break after “What if”.
-- Behavior: the browser verification covers both drag directions and their live colors, cancelled drag returning to blue, repeated button clicks, undo, refresh, final completion, reduced motion, and horizontal overflow. The undo action has a reserved slot above the hint and buttons.
-- Visual follow-up: mascot contours and the gradient remain slightly different from the flattened references. No actionable overlap or clipping was found in the tested viewports.
-- Accessibility finding: the supplied error/500 and primary/500 colors introduce insufficient color contrast. White button labels measure 2.77:1 on coral and 2.19:1 on teal (required 4.5:1). Large colored card text during drag measures the same ratios on white (required 3:1). All six Step 2 Storybook cases consequently report this finding; the accessibility checks have not been disabled. A future accessibility revision needs darker colors or different text colors.
-
-## Design token audit
-
-- Replaced raw application colors with supplied palette tokens throughout setup, sorting, and reflection. The sorting card's Motion colors now read the same token JSON as the generated CSS.
-- Replaced existing raw corner radii with radius tokens, adding `xs` (4 px) and `md` (12 px) for the recurring card corners. Unique layout measurements and typographic foundation definitions remain component values.
-- `npm run tokens:check` now detects raw application color and corner-radius values outside the generated token file and visual assets. Typecheck, lint, unit tests, build, and browser sorting flow passed after the migration; the existing six Storybook contrast findings remain.
-
-final result: visual and interaction checks passed; accessibility color contrast remains unresolved to preserve the approved reference colors.
+Follow the [verification guide](docs/development.md#verification). Capture the exact viewport, input data, interaction state, and revision used. After a visual change, update the affected evidence and record the result before describing it as current.
