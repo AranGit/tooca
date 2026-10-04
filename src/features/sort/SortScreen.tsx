@@ -32,7 +32,7 @@ function cardTextSizeClass(text: string) {
   return ''
 }
 
-export function SortScreen() {
+export function SortScreen({ shouldFocusHeading = false }: { shouldFocusHeading?: boolean }) {
   const thoughts = useFrozenSessionValue((state) => state.thoughts)
   const pending = thoughts.filter((thought) => thought.category === null)
   const current = pending[0]
@@ -42,8 +42,8 @@ export function SortScreen() {
   const [mascotCooldown, setMascotCooldown] = useState(false)
 
   useLayoutEffect(() => {
-    headingRef.current?.focus({ preventScroll: true })
-  }, [])
+    if (shouldFocusHeading) headingRef.current?.focus({ preventScroll: true })
+  }, [shouldFocusHeading])
 
   useEffect(() => () => {
     if (mascotTimer.current) window.clearTimeout(mascotTimer.current)

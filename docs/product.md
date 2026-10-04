@@ -75,7 +75,7 @@ The interaction is intended to interrupt passive rumination by giving the user a
 | Reflection | **Clear & Begin again** | Clears all cards and history; returns to Add cards |
 | Any phase | **Add cards** in the header | Returns to setup while retaining existing cards and categories |
 
-The input accepts up to 120 characters and shows a character count. Whitespace-only input cannot be submitted. Manually entered duplicate concerns are allowed. There are 30 mock examples; the example button disables when all are already present. The Add cards list is newest-first so the concern that was just added is immediately visible. This presentation order only applies to Step 1; sorting and reflection use original entry order.
+The input accepts up to 150 characters and shows a character count. Whitespace-only input cannot be submitted. Manually entered duplicate concerns are allowed. There are 30 mock examples; the example button disables when all are already present. The Add cards list is newest-first so the concern that was just added is immediately visible. This presentation order only applies to Step 1; sorting and reflection use original entry order.
 
 ## Reflection states
 

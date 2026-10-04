@@ -11,9 +11,9 @@ function cardCountLabel(count: number) {
   return `Let's sort these ${count} ${count === 1 ? 'thing' : 'things'}`
 }
 
-const thoughtCharacterLimit = 120
+const thoughtCharacterLimit = 150
 
-export function SetupScreen() {
+export function SetupScreen({ shouldFocusHeading = false }: { shouldFocusHeading?: boolean }) {
   const [draft, setDraft] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
@@ -29,8 +29,8 @@ export function SetupScreen() {
   )
 
   useLayoutEffect(() => {
-    headingRef.current?.focus({ preventScroll: true })
-  }, [])
+    if (shouldFocusHeading) headingRef.current?.focus({ preventScroll: true })
+  }, [shouldFocusHeading])
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()

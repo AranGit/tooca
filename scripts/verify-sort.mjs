@@ -44,7 +44,7 @@ async function openLongTextMobile() {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } })
   page.setDefaultTimeout(5000)
   page.on('pageerror', error => errors.push(error.message))
-  const text = 'Preparing for my presentation and worrying about what other people might think. '.repeat(2).slice(0, 120)
+  const text = 'Preparing for my presentation and worrying about what other people might think. '.repeat(2).slice(0, 150)
   await page.addInitScript(({ text }) => {
     sessionStorage.setItem('tooca-session', JSON.stringify({
       state: { phase: 'sort', thoughts: [{ id: 'long', text, category: null }], history: [] }, version: 1,

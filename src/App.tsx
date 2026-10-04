@@ -1,5 +1,6 @@
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { Check } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 import toocaLogo from '@/assets/brand/tooca-logo.svg'
 import { ReflectionScreen } from '@/features/reflection/ReflectionScreen'
 import { SetupScreen } from '@/features/setup/SetupScreen'
@@ -38,6 +39,15 @@ function StepIndicator({ phase }: { phase: 'setup' | 'sort' | 'reflection' }) {
 function App() {
   const phase = useSessionStore((state) => state.phase)
   const reduceMotion = useReducedMotion()
+  const previousPhase = useRef(phase)
+  const [shouldFocusHeading, setShouldFocusHeading] = useState(false)
+
+  useEffect(() => {
+    if (previousPhase.current !== phase) {
+      previousPhase.current = phase
+      setShouldFocusHeading(true)
+    }
+  }, [phase])
 
   return (
     <div className={`flow-shell ${phase === 'reflection' ? 'flow-shell--reflection' : ''}`}>
@@ -60,11 +70,11 @@ function App() {
             transition={{ duration: 0.22 }}
           >
             {phase === 'setup' ? (
-              <SetupScreen />
+              <SetupScreen shouldFocusHeading={shouldFocusHeading} />
             ) : phase === 'sort' ? (
-              <SortScreen />
+              <SortScreen shouldFocusHeading={shouldFocusHeading} />
             ) : (
-              <ReflectionScreen />
+              <ReflectionScreen shouldFocusHeading={shouldFocusHeading} />
             )}
           </motion.div>
         </AnimatePresence>

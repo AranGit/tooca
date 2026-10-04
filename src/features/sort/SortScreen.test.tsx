@@ -92,10 +92,10 @@ describe('SortScreen', () => {
     expect(screen.getByRole('group', { name: 'Card 1 of 1' })).not.toHaveAttribute('tabindex')
   })
 
-  it('uses the compact card type for a 120-character concern', () => {
+  it('uses the compact card type for a 150-character concern', () => {
     useSessionStore.setState({
       phase: 'sort',
-      thoughts: [{ id: 'first', text: 'a'.repeat(120), category: null }],
+      thoughts: [{ id: 'first', text: 'a'.repeat(150), category: null }],
       history: [],
     })
     render(<SortScreen />)

@@ -61,7 +61,7 @@ function SummaryGroup({ group, title, thoughts, open, onToggle }: SummaryGroupPr
   )
 }
 
-export function ReflectionScreen() {
+export function ReflectionScreen({ shouldFocusHeading = false }: { shouldFocusHeading?: boolean }) {
   const thoughts = useFrozenSessionValue((state) => state.thoughts)
   const history = useFrozenSessionValue((state) => state.history)
   const undoLastDecision = useSessionStore((state) => state.undoLastDecision)
@@ -72,8 +72,8 @@ export function ReflectionScreen() {
   const rest = thoughts.filter((thought) => thought.category === 'rest-it-here')
 
   useLayoutEffect(() => {
-    headingRef.current?.focus({ preventScroll: true })
-  }, [])
+    if (shouldFocusHeading) headingRef.current?.focus({ preventScroll: true })
+  }, [shouldFocusHeading])
 
   function toggle(group: Group) {
     setOpenGroups((current) => ({ ...current, [group]: !current[group] }))
