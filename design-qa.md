@@ -8,9 +8,9 @@ This report records earlier visual and interaction reviews. Screenshots are hist
 
 | Area | Recorded result | Remaining concern |
 | :--- | :--- | :--- |
-| Add cards | Reference comparisons and responsive spacing fixes completed | Captures predate later header and text updates |
-| Sort cards | Full neutral, drag, next-card, undo, and responsive states reviewed | Supplied colors have insufficient contrast |
-| Reflection | Groups, undo, reset, responsive layout, and persistence reviewed | Captures predate some background and mascot-state updates |
+| Add cards | Reference comparisons and responsive spacing fixes completed | Captures predate the 150-character input cap and initial-focus update |
+| Sort cards | Full neutral, drag, next-card, undo, and responsive states reviewed | Captures predate mobile mascot feedback and delayed next-card text; supplied colors have insufficient contrast |
+| Reflection | Groups, undo, reset, responsive layout, and persistence reviewed | Captures predate the supplied group icon assets and some background and mascot-state updates |
 | Design tokens | Shared color/radius generation and raw-value audit added | Layout and typography values have separate ownership |
 
 ## Visual evidence

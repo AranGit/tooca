@@ -68,12 +68,14 @@ The interaction is intended to interrupt passive rumination by giving the user a
 | Sort cards | Swipe left / **Rest It Here** | Assigns the current card to the rest category |
 | Sort cards | Swipe right / **In My Hands** | Assigns the current card to the actionable category |
 | Sort cards | Release a short, slow drag | Returns the card to its neutral position without a decision |
+| Sort cards on mobile | Choose a category by swipe or button | Mooca confirms the direction, then after 0.9 seconds returns to the neutral pose as the next card's text fades in; sorting controls stay unavailable during this feedback |
 | Sort cards | **Bring it back** | Restores the most recent decision as an unsorted card |
 | Sort cards | Sort the last card | Opens reflection automatically |
 | Reflection | Toggle a category | Expands or collapses that group independently |
 | Reflection | **Bring it back** | Returns to sorting and undoes the latest decision |
 | Reflection | **Clear & Begin again** | Clears all cards and history; returns to Add cards |
 | Any phase | **Add cards** in the header | Returns to setup while retaining existing cards and categories |
+| Any phase | Change steps after the initial load | Moves focus to the destination heading for keyboard and screen-reader continuity |
 
 The input accepts up to 150 characters and shows a character count. Whitespace-only input cannot be submitted. Manually entered duplicate concerns are allowed. There are 30 mock examples; the example button disables when all are already present. The Add cards list is newest-first so the concern that was just added is immediately visible. This presentation order only applies to Step 1; sorting and reflection use original entry order.
 

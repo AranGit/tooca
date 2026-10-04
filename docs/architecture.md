@@ -45,7 +45,8 @@ The progress indicator has two labels: Add cards and Sort cards. Both are comple
 | :--- | :--- | :--- |
 | Phase, cards, categories, decision history | [Zustand store](../src/store/session.ts) | Yes, in the same tab |
 | Unsubmitted input | SetupScreen local state | No |
-| Card drag position, animation lock, dragging state | SortTurn local state and Motion values | No |
+| Card drag position, card-exit lock, dragging state | SortTurn local state and Motion values | No |
+| Mobile mascot state and feedback cooldown | SortScreen local state | No |
 | Expanded summary groups | ReflectionScreen local state | No |
 | Pending cards and category groups | Derived from stored cards | Recomputed |
 | Exiting screen snapshot | Motion presence context | No; kept only until the exit animation completes |
@@ -83,7 +84,7 @@ The stored array remains in original entry order. Step 1 creates a reversed view
 - Returning to setup retains existing categories. New cards start uncategorized.
 - Empty sessions cannot enter sorting; fully categorized sessions continue to reflection.
 - Sorting accepts only an existing, uncategorized card while in the sort phase.
-- A local animation lock prevents rapid clicks from recording multiple decisions during a card exit.
+- A local card-exit lock prevents rapid clicks from recording multiple decisions during a card exit. On mobile, SortScreen also retains the directional mascot feedback and interaction cooldown across the next-card transition.
 - Begin again resets the stored session. There is no server persistence or cross-device sync.
 
 The store also exposes `restartSorting`, which clears categories and history while keeping card text. It is currently not connected to a user-facing control; **Begin again** uses `resetSession` instead.

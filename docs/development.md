@@ -104,7 +104,7 @@ In another terminal:
 TOOCA_QA_OUTPUT=/tmp/tooca-sort-qa node scripts/verify-sort.mjs
 ```
 
-The script checks drag colors, both swipe directions, cancelled drags, undo, refresh, repeated-click protection, completion, reduced motion, responsive layout, and runtime errors. It saves screenshots to the selected output folder. Without the override, it writes into `qa/step2-full`, replacing saved evidence with matching filenames.
+The script checks drag colors, both swipe directions, cancelled drags, undo, refresh, repeated-click protection, completion, reduced motion, responsive layout, a 150-character card on mobile, a short laptop viewport, and runtime errors. It saves screenshots to the selected output folder. Without the override, it writes into `qa/step2-full`, replacing saved evidence with matching filenames.
 
 ### Manual review
 
