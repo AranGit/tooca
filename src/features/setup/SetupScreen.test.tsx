@@ -13,14 +13,14 @@ describe('SetupScreen', () => {
   it('adds a trimmed card with Enter and keeps the field ready for another', async () => {
     const user = userEvent.setup()
     render(<SetupScreen />)
-    const input = screen.getByRole('textbox', { name: 'Things on your mind' })
+    const input = screen.getByRole('textbox', { name: "What's on your mind?" })
 
     expect(screen.getByRole('button', { name: 'Add another' })).toBeDisabled()
-    expect(screen.getByRole('button', { name: /Let's sort these 0 things/ })).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Add a thought to continue' })).toBeDisabled()
 
     await user.type(input, "  Tomorrow's meeting  {Enter}")
 
-    expect(within(screen.getByRole('list', { name: 'Things on your mind' })).getByText("Tomorrow's meeting")).toBeInTheDocument()
+    expect(within(screen.getByRole('list', { name: 'Your thoughts' })).getByText("Tomorrow's meeting")).toBeInTheDocument()
     expect(input).toHaveValue('')
     expect(input).toHaveFocus()
     expect(screen.getByRole('button', { name: /Let's sort these 1 thing/ })).toBeEnabled()
@@ -29,7 +29,7 @@ describe('SetupScreen', () => {
   it('limits a concern to 150 characters and shows the remaining count', async () => {
     const user = userEvent.setup()
     render(<SetupScreen />)
-    const input = screen.getByRole('textbox', { name: 'Things on your mind' })
+    const input = screen.getByRole('textbox', { name: "What's on your mind?" })
 
     await user.type(input, 'a'.repeat(151))
 
@@ -40,7 +40,7 @@ describe('SetupScreen', () => {
   it('keeps user cards, appends unique examples, removes a chosen card, and continues', async () => {
     const user = userEvent.setup()
     render(<SetupScreen />)
-    const input = screen.getByRole('textbox', { name: 'Things on your mind' })
+    const input = screen.getByRole('textbox', { name: "What's on your mind?" })
 
     await user.type(input, 'My own concern')
     await user.click(screen.getByRole('button', { name: 'Add another' }))

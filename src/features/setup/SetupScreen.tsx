@@ -8,6 +8,7 @@ import { useFrozenSessionValue, useSessionStore } from '@/store/session'
 import { pickExamples, WORRY_EXAMPLES } from './examples'
 
 function cardCountLabel(count: number) {
+  if (count === 0) return 'Add a thought to continue'
   return `Let's sort these ${count} ${count === 1 ? 'thing' : 'things'}`
 }
 
@@ -64,7 +65,7 @@ export function SetupScreen({ shouldFocusHeading = false }: { shouldFocusHeading
       <div className="setup-workspace">
         <form className="thought-form" onSubmit={handleSubmit}>
           <div className="thought-form__heading">
-            <label htmlFor="thought-input">Things on your mind</label>
+            <label htmlFor="thought-input">What's on your mind?</label>
             <img
               className="setup-workspace__mascot"
               src={moocaUsingPhone}
@@ -106,7 +107,7 @@ export function SetupScreen({ shouldFocusHeading = false }: { shouldFocusHeading
         </button>
 
         <div className="thought-list-wrap">
-          <ul className="thought-list" aria-label="Things on your mind">
+          <ul className="thought-list" aria-label="Your thoughts">
             <AnimatePresence initial={false}>
               {thoughts.toReversed().map((thought) => (
                 <motion.li

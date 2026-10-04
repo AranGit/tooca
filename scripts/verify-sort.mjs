@@ -36,7 +36,7 @@ async function openSetup(width, height) {
     }))
   })
   await page.goto('http://127.0.0.1:4173/')
-  await page.getByRole('textbox', { name: 'Things on your mind' }).waitFor()
+  await page.getByRole('textbox', { name: "What's on your mind?" }).waitFor()
   await page.evaluate(() => document.fonts.ready)
   return page
 }
