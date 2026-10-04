@@ -1,10 +1,30 @@
-<svg width="176" height="158" viewBox="0 0 176 158" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M93.1087 38.586C94.3537 34.3468 98.8001 31.9191 103.039 33.1641L169.324 52.6319C173.564 53.877 175.991 58.3233 174.746 62.5626L148.459 152.064C147.214 156.302 142.769 158.729 138.53 157.484L72.2444 138.017C68.0052 136.772 65.5775 132.325 66.8225 128.086L93.1087 38.586Z" fill="#EF7773"/>
-<path d="M106.855 0.171165C111.003 -0.715251 115.083 1.92874 115.97 6.07644L139.726 117.216C140.612 121.364 137.969 125.445 133.822 126.331L33.0433 147.873C28.8955 148.76 24.8137 146.116 23.9271 141.968L0.171208 30.8284C-0.715346 26.6806 1.92873 22.5998 6.07648 21.7132L106.855 0.171165Z" fill="#00C4B3"/>
-<mask id="mask0_2147_18774" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="140" height="149">
-<path d="M0.171543 30.8283C-0.715056 26.6805 1.92871 22.5993 6.07656 21.7127L106.855 0.171451C111.002 -0.715147 115.084 1.92862 115.97 6.07647L139.726 117.216C140.613 121.364 137.969 125.445 133.821 126.332L33.0432 147.873C28.8953 148.759 24.8141 146.116 23.9275 141.968L0.171543 30.8283Z" fill="#00C4B3"/>
-</mask>
-<g mask="url(#mask0_2147_18774)">
-<path d="M52.814 142.588V65.9146H29.5128C23.3727 65.9146 18.3346 60.8765 18.3346 54.7363C18.3346 48.5962 23.3727 43.5581 29.5128 43.5581H100.361C106.501 43.5581 111.539 48.5962 111.539 54.7363C111.539 60.8765 106.501 65.9146 100.361 65.9146H77.0597V142.588C77.0597 149.358 71.7068 154.711 64.9368 154.711C58.1669 154.711 52.814 149.358 52.814 142.588Z" fill="white"/>
+<svg width="186" height="184" viewBox="0 0 186 184" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="tooca-favicon-title tooca-favicon-desc">
+<title id="tooca-favicon-title">Tooca icon</title>
+<desc id="tooca-favicon-desc">Two stacked thought cards.</desc>
+<g filter="url(#filter0_dd_2264_20687)">
+<path d="M57.1628 30.1974C57.93 25.8462 62.0793 22.9409 66.4305 23.7081L154.078 39.1628C158.43 39.93 161.335 44.0793 160.568 48.4305L145.113 136.078C144.346 140.43 140.196 143.335 135.845 142.568L48.1974 127.113C43.8463 126.346 40.9409 122.196 41.7081 117.845L57.1628 30.1974Z" fill="#EF7773"/>
+<path d="M25.3892 34.1115C24.622 29.7604 27.5273 25.6111 31.8785 24.8439L119.526 9.38919C123.878 8.62196 128.027 11.5273 128.794 15.8785L144.249 103.526C145.016 107.878 142.111 112.027 137.759 112.794L50.1115 128.249C45.7604 129.016 41.6111 126.111 40.8439 121.759L25.3892 34.1115Z" fill="#00C4B3"/>
+<path d="M51.6462 57.2766C51.6462 53.1345 55.0041 49.7766 59.1462 49.7766L111.146 49.7766C115.288 49.7766 118.646 53.1345 118.646 57.2766V57.2766C118.646 61.4187 115.288 64.7766 111.146 64.7766L59.1462 64.7766C55.0041 64.7766 51.6462 61.4187 51.6462 57.2766V57.2766Z" fill="#FBFBFB"/>
+<path d="M51.6462 79.2766C51.6462 75.1345 55.0041 71.7766 59.1462 71.7766L90.1462 71.7766C94.2884 71.7766 97.6462 75.1345 97.6462 79.2766V79.2766C97.6462 83.4187 94.2884 86.7766 90.1462 86.7766L59.1462 86.7766C55.0041 86.7766 51.6462 83.4187 51.6462 79.2766V79.2766Z" fill="#FBFBFB"/>
+<circle cx="111.146" cy="79.2766" r="7.5" fill="#FBFBFB"/>
 </g>
+<defs>
+<filter id="filter0_dd_2264_20687" x="0" y="0" width="185.957" height="183.957" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="16"/>
+<feGaussianBlur stdDeviation="12"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0.768627 0 0 0 0 0.701961 0 0 0 0.1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2264_20687"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feMorphology radius="4" operator="erode" in="SourceAlpha" result="effect2_dropShadow_2264_20687"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="4"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0.768627 0 0 0 0 0.701961 0 0 0 0.1 0"/>
+<feBlend mode="normal" in2="effect1_dropShadow_2264_20687" result="effect2_dropShadow_2264_20687"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect2_dropShadow_2264_20687" result="shape"/>
+</filter>
+</defs>
 </svg>
