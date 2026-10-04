@@ -51,7 +51,7 @@ export function SetupScreen({ shouldFocusHeading = false }: { shouldFocusHeading
       <div className="setup-intro">
         <div className="setup-intro__copy">
           <h1 ref={headingRef} id="setup-title" tabIndex={-1}>What's on your mind<br className="desktop-break" /> right now?</h1>
-          <p>Take your time, let's lay them out one by one.</p>
+          <p>A two-minute pause to sort what’s in your hands.</p>
         </div>
         <img
           className="setup-intro__mascot"

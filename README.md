@@ -8,6 +8,8 @@
 
 A gentle, interactive space to put worries into words, sort them one at a time, and reflect on what can be acted on now.
 
+**A two-minute pause to sort what’s in your hands.**
+
 **[Try the live demo → tooca-case-study.vercel.app](https://tooca-case-study.vercel.app/)**
 
 [Product & experience](docs/product.md) · [Architecture & state](docs/architecture.md) · [Development & design system](docs/development.md) · [Design QA](design-qa.md)
