@@ -71,7 +71,7 @@ The interaction is intended to interrupt passive rumination by giving the user a
 | Sort cards on mobile | Choose a category by swipe or button | Mooca confirms the direction, then after 0.9 seconds returns to the neutral pose as the next card's text fades in; sorting controls stay unavailable during this feedback |
 | Sort cards | **Bring it back** | Restores the most recent decision as an unsorted card |
 | Sort cards | Sort the last card | Opens reflection automatically |
-| Reflection | Toggle a category | Expands or collapses that group independently |
+| Reflection | Toggle a category with cards | Expands or collapses that group independently; a 0-card category remains a static summary |
 | Reflection | **Bring it back** | Returns to sorting and undoes the latest decision |
 | Reflection | **Clear & Begin again** | Clears all cards and history; returns to Add cards |
 | Any phase | **Add cards** in the header | Returns to setup while retaining existing cards and categories |
@@ -87,7 +87,7 @@ The input accepts up to 150 characters and shows a character count. Whitespace-o
 | All cards are in your hands | These things are in your hands. You can take them one at a time. | Happy |
 | All cards rest here | These things can rest here for now. You don't have to figure everything out today. | Hugging |
 
-**In My Hands** starts expanded; **Rest It Here** starts collapsed. Each group shows its count, retains original entry order, and displays an empty-state message when needed.
+**In My Hands** starts expanded; **Rest It Here** starts collapsed. Each group shows its count and retains original entry order. A category with 0 cards is shown as a static summary without an expand control.
 
 ## Experience boundaries
 

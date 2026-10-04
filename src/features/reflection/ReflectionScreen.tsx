@@ -23,28 +23,35 @@ function SummaryGroup({ group, title, thoughts, open, onToggle }: SummaryGroupPr
   const headingId = `reflection-${group}-heading`
   const panelId = `reflection-${group}-panel`
   const countLabel = `${thoughts.length} ${thoughts.length === 1 ? 'card' : 'cards'}`
+  const hasCards = thoughts.length > 0
+
+  const summary = (
+    <>
+      <span className="reflection-group__icon" aria-hidden="true">
+        <img src={group === 'hands' ? reflectionCheck : reflectionClock} alt="" />
+      </span>
+      <span className="reflection-group__title">{title}</span>
+      <span className="reflection-group__count">{countLabel}</span>
+    </>
+  )
 
   return (
     <div className={`reflection-group reflection-group--${group}`}>
-      <button
-        id={headingId}
-        type="button"
-        className="reflection-group__toggle"
-        aria-expanded={open}
-        aria-controls={panelId}
-        aria-label={`${title}, ${countLabel}`}
-        onClick={onToggle}
-      >
-        <span className="reflection-group__icon" aria-hidden="true">
-          <img src={group === 'hands' ? reflectionCheck : reflectionClock} alt="" />
-        </span>
-        <span className="reflection-group__title">{title}</span>
-        <span className="reflection-group__count">{countLabel}</span>
-        <ChevronDown className={`reflection-group__chevron ${open ? 'is-open' : ''}`} size={26} strokeWidth={2.2} aria-hidden="true" />
-      </button>
-
-      <div id={panelId} role="region" aria-labelledby={headingId} className="reflection-group__panel" hidden={!open}>
-        {thoughts.length > 0 ? (
+      {hasCards ? (
+        <>
+          <button
+            id={headingId}
+            type="button"
+            className="reflection-group__toggle"
+            aria-expanded={open}
+            aria-controls={panelId}
+            aria-label={`${title}, ${countLabel}`}
+            onClick={onToggle}
+          >
+            {summary}
+            <ChevronDown className={`reflection-group__chevron ${open ? 'is-open' : ''}`} size={26} strokeWidth={2.2} aria-hidden="true" />
+          </button>
+          <div id={panelId} role="region" aria-labelledby={headingId} className="reflection-group__panel" hidden={!open}>
           <ol className="reflection-group__list">
             {thoughts.map((thought, index) => (
               <li key={thought.id} className="reflection-group__card">
@@ -53,10 +60,11 @@ function SummaryGroup({ group, title, thoughts, open, onToggle }: SummaryGroupPr
               </li>
             ))}
           </ol>
-        ) : (
-          <p className="reflection-group__empty">No cards here for now.</p>
-        )}
-      </div>
+          </div>
+        </>
+      ) : (
+        <div className="reflection-group__summary">{summary}</div>
+      )}
     </div>
   )
 }

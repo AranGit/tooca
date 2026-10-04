@@ -94,6 +94,15 @@
   cursor: pointer;
 }
 
+.reflection-group__summary {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 65px;
+  padding: 12px;
+  color: var(--color-gray-1000);
+}
+
 .reflection-group__icon {
   display: inline-flex;
   align-items: center;
@@ -173,16 +182,6 @@
   color: var(--color-gray-700);
   font-size: 16px;
   font-weight: 350;
-}
-
-.reflection-group__empty {
-  margin: 0 12px 12px;
-  padding: 8px 10px;
-  border-radius: var(--radius-xs);
-  background: var(--color-gray-50);
-  color: var(--color-gray-700);
-  font-size: 14px;
-  line-height: 20px;
 }
 
 .reflection-screen__actions {

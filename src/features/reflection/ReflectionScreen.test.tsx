@@ -40,6 +40,22 @@ describe('ReflectionScreen', () => {
     expect(hands).toHaveAttribute('aria-expanded', 'true')
   })
 
+  it('shows an empty category as a static summary without an expand control', () => {
+    useSessionStore.setState({
+      thoughts: [
+        { id: 'first', text: 'Job interview tomorrow.', category: 'in-my-hands' },
+      ],
+      history: [
+        { thoughtId: 'first', previousCategory: null, nextCategory: 'in-my-hands' },
+      ],
+    })
+    render(<ReflectionScreen />)
+
+    expect(screen.getByText('Rest It Here')).toBeVisible()
+    expect(screen.getByText('0 cards')).toBeVisible()
+    expect(screen.queryByRole('button', { name: 'Rest It Here, 0 cards' })).not.toBeInTheDocument()
+  })
+
   it('returns the last decision to sorting without losing earlier choices', async () => {
     const user = userEvent.setup()
     render(<ReflectionScreen />)
