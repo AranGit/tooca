@@ -48,6 +48,7 @@ The progress indicator has two labels: Add cards and Sort cards. Both are comple
 | Card drag position, card-exit lock, dragging state | SortTurn local state and Motion values | No |
 | Mobile mascot state and feedback cooldown | SortScreen local state | No |
 | Expanded summary groups | ReflectionScreen local state | No |
+| Splash visibility | App local state, initialized from `tooca-splash-seen` | Yes, in the same tab |
 | Pending cards and category groups | Derived from stored cards | Recomputed |
 | Exiting screen snapshot | Motion presence context | No; kept only until the exit animation completes |
 
@@ -80,6 +81,7 @@ The stored array remains in original entry order. Step 1 creates a reversed view
 
 - The storage key is `tooca-session`, schema version `1`.
 - Only `phase`, `thoughts`, and `history` are persisted.
+- `tooca-splash-seen` is a separate, lightweight session key. It records that the decorative favicon splash has played in this tab; it does not affect cards or flow state.
 - Hydration filters invalid card records and invalid history entries, then reconciles the phase with the remaining cards.
 - Returning to setup retains existing categories. New cards start uncategorized.
 - Empty sessions cannot enter sorting; fully categorized sessions continue to reflection.
@@ -98,6 +100,7 @@ src/
 │   ├── flow/               Shared layout, header, setup styles
 │   ├── setup/              Concern entry and mock examples
 │   ├── sort/               Swipe interaction and undo
+│   ├── splash/             One-time favicon splash animation
 │   └── reflection/         Category summaries and reset
 ├── store/session.ts        Session model, transitions, persistence
 ├── components/Button/      Reusable button and stories

@@ -9,6 +9,21 @@ beforeEach(() => {
 })
 
 describe('App', () => {
+  it('shows the splash once and records it in the current tab session', () => {
+    render(<App />)
+
+    expect(screen.getByTestId('splash-screen')).toBeInTheDocument()
+    expect(sessionStorage.getItem('tooca-splash-seen')).toBe('true')
+  })
+
+  it('does not show the splash again when the current tab has seen it', () => {
+    sessionStorage.setItem('tooca-splash-seen', 'true')
+
+    render(<App />)
+
+    expect(screen.queryByTestId('splash-screen')).not.toBeInTheDocument()
+  })
+
   it('does not focus the setup heading on the initial load', () => {
     render(<App />)
 
