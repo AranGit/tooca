@@ -20,6 +20,7 @@ async function open(width, height, reducedMotion = 'no-preference') {
     }))
   }, thoughts)
   await page.goto('http://127.0.0.1:4173/')
+  await page.getByTestId('splash-screen').waitFor({ state: 'hidden' })
   await page.getByRole('group', { name: 'Card 1 of 2' }).waitFor()
   await page.evaluate(() => document.fonts.ready)
   await page.waitForTimeout(250)
@@ -36,6 +37,7 @@ async function openSetup(width, height) {
     }))
   })
   await page.goto('http://127.0.0.1:4173/')
+  await page.getByTestId('splash-screen').waitFor({ state: 'hidden' })
   await page.getByRole('textbox', { name: "What's on your mind?" }).waitFor()
   await page.evaluate(() => document.fonts.ready)
   return page
@@ -51,6 +53,7 @@ async function openLongTextMobile() {
     }))
   }, { text })
   await page.goto('http://127.0.0.1:4173/')
+  await page.getByTestId('splash-screen').waitFor({ state: 'hidden' })
   await page.getByRole('group', { name: 'Card 1 of 1' }).waitFor()
   await page.evaluate(() => document.fonts.ready)
   await page.waitForTimeout(250)

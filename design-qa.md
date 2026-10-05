@@ -2,7 +2,7 @@
 
 [← README](README.md) · [Product](docs/product.md) · [Development & verification](docs/development.md)
 
-This report records visual and interaction review evidence. The current capture set was refreshed on 4 October 2026 after the independent TOOCA two-card logo and favicon replaced the earlier identity assets. Older comparison captures remain in the repository as process history; they are not evidence of the current identity.
+This report records visual and interaction review evidence. The current capture set was refreshed on 5 October 2026 at revision `9c32d2c` after the Sort subtitle display update. Older comparison captures remain in the repository as process history; they are not evidence of the current implementation.
 
 ## Review overview
 
