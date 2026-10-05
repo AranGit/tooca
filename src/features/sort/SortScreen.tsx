@@ -154,7 +154,7 @@ function SortTurn({ current, remaining, total, headingRef, mobileMascot, mascotC
     <section className="sort-screen" aria-labelledby="sort-title">
       <div className="sort-screen__intro">
         <h1 ref={headingRef} id="sort-title" tabIndex={-1}>What's in your hands right now?</h1>
-        <p>There are no wrong answers. You can bring a card back anytime.</p>
+        <p>There are no wrong answers.<br />You can bring a card back anytime.</p>
       </div>
       <div className="sort-screen__scene">
         <div className="sort-screen__mascot sort-screen__mascot--left" aria-hidden="true"><img src={moocaHugging} alt="" /></div>
